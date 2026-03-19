@@ -37,9 +37,9 @@ CREATE TABLE tblMember (
     memberSurname VARCHAR(50) NOT NULL,
     memberEmail VARCHAR(100) NOT NULL UNIQUE,
     memberPhone VARCHAR(20) NOT NULL,
-    memberDOB DATETIME NOT NULL,
+    memberDOB DATE NOT NULL,
     membershipType VARCHAR(10) NOT NULL CHECK (membershipType IN ('All', 'SGPT', 'HIIT&Hyrox', 'Boxing')),
-    membershipStartDate DATETIME NOT NULL,
+    membershipStartDate DATE NOT NULL,
     memberStartWeight DECIMAL(3, 2) NOT NULL,
     memberCurrentWeight DECIMAL(3, 2) DEFAULT NULL,
     memberStartMuscleMass DECIMAL(2, 2) NOT NULL,
@@ -53,7 +53,7 @@ CREATE TABLE tblClass (
     classId INT(8) PRIMARY KEY AUTO_INCREMENT NOT NULL,
     className VARCHAR(100) NOT NULL,
     classCategory VARCHAR(50) NOT NULL CHECK (classCategory IN ('SGPT', 'HIIT', 'Boxing', 'Hyrox')),
-    classDate DATE NOT NULL, /*UPDATE THIS TO THE DATABASE*/
+    classDate DATE NOT NULL,
     classStartTime TIME NOT NULL,
     classEndTime TIME NOT NULL,
     FOREIGN KEY (centreId) REFERENCES tblCentre(centreId)

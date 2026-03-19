@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 :root {
     --bg-dark: oklch(0.92 0.06 281);
     --bg: oklch(0.96 0.06 281);
@@ -8,7 +11,7 @@
     --border: oklch(0.6 0.12 281);
     --border-muted: oklch(0.7 0.12 281);
     --primary: oklch(0.4 0.12 281);
-    --secondary: oklch(0.4 0.12 101);
+    --secondary: oklch(84.639% 0.03609 290.86);
     --danger: oklch(0.5 0.12 30);
     --warning: oklch(0.5 0.12 100);
     --success: oklch(0.5 0.12 160);
@@ -23,26 +26,29 @@
 
 body {
     line-height: 1.5;
-    padding: 20px;
+    padding: 30px;
 
     background-color: var(--bg-dark);
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Montserrat";
 }
 
 .page {
     max-width: 1280px;
-    padding: 20px;
+
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
 }
 
 .banner {
     text-align: center;
     padding: 10px 10px 0px 10px;    
-    border-radius: 5px 5px 0px 0px;
+    border-radius: 8px 8px 0px 0px;
     background-color: var(--bg);
     color: var(--text);
 }
 
 h1 {
+    font-family: "Racing Sans One", "sans-serif";
+    font-size: 50px;
     color: var(--primary);
 }
 
@@ -54,13 +60,13 @@ h1 {
 }
 
 a {
-    margin: px 5px 0px 0px;
+    margin: 0px 8px 0px 0px;
     color: var(--nav-link);
     transition: color 0.3s;
 }
 
 a:hover {
-    color: var(--secondary);
+    color: var(--border-muted);
 }
 
 h2 {
@@ -69,7 +75,7 @@ h2 {
 
 .main {
     padding: 10px;
-    border-radius: 0px 0px 5px 5px;
+    border-radius: 0px 0px 8px 8px;
     background-color: var(--bg-light);
     color: var(--text);
 }
@@ -82,5 +88,4 @@ table {
 td, th {
     border: solid 1px var(--text);
     padding: 10px;
-
 }
