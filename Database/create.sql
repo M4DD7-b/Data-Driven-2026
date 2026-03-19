@@ -53,7 +53,7 @@ CREATE TABLE tblClass (
     classId INT(8) PRIMARY KEY AUTO_INCREMENT NOT NULL,
     className VARCHAR(100) NOT NULL,
     classCategory VARCHAR(50) NOT NULL CHECK (classCategory IN ('SGPT', 'HIIT', 'Boxing', 'Hyrox')),
-    classDate DATE NOT NULL,
+    classDate DATE NOT NULL, /*UPDATE THIS TO THE DATABASE*/
     classStartTime TIME NOT NULL,
     classEndTime TIME NOT NULL,
     FOREIGN KEY (centreId) REFERENCES tblCentre(centreId)
