@@ -1,0 +1,86 @@
+:root {
+    --bg-dark: oklch(0.92 0.06 281);
+    --bg: oklch(0.96 0.06 281);
+    --bg-light: oklch(1 0.06 281);
+    --text: oklch(0.15 0.12 281);
+    --text-muted: oklch(0.4 0.12 281);
+    --highlight: oklch(1 0.12 281);
+    --border: oklch(0.6 0.12 281);
+    --border-muted: oklch(0.7 0.12 281);
+    --primary: oklch(0.4 0.12 281);
+    --secondary: oklch(0.4 0.12 101);
+    --danger: oklch(0.5 0.12 30);
+    --warning: oklch(0.5 0.12 100);
+    --success: oklch(0.5 0.12 160);
+    --info: oklch(0.5 0.12 260);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    line-height: 1.5;
+    padding: 20px;
+
+    background-color: var(--bg-dark);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.page {
+    max-width: 1280px;
+    padding: 20px;
+}
+
+.banner {
+    text-align: center;
+    padding: 10px 10px 0px 10px;    
+    border-radius: 5px 5px 0px 0px;
+    background-color: var(--bg);
+    color: var(--text);
+}
+
+h1 {
+    color: var(--primary);
+}
+
+.nav {
+    text-align: center;
+    padding: 10px;
+    background-color: var(--bg);
+    color: var(--primary);
+}
+
+a {
+    margin: px 5px 0px 0px;
+    color: var(--nav-link);
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: var(--secondary);
+}
+
+h2 {
+    color: var(--primary);
+}
+
+.main {
+    padding: 10px;
+    border-radius: 0px 0px 5px 5px;
+    background-color: var(--bg-light);
+    color: var(--text);
+}
+
+table {
+    margin: 10px 0px;
+    border-collapse: collapse;
+}
+
+td, th {
+    border: solid 1px var(--text);
+    padding: 10px;
+
+}
