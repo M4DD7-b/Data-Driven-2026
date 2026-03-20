@@ -1,6 +1,7 @@
 DELETE FROM tblCoachCentre;
 DELETE FROM tblReservation;
 DELETE FROM tblCoach;
+DELETE FROM tblMeasurement;
 DELETE FROM tblMember;
 DELETE FROM tblClass;
 DELETE FROM tblCentre;
@@ -35,16 +36,28 @@ INSERT INTO tblCoachCentre VALUES
     (2, 5);
 
 INSERT INTO tblMember VALUES
-    (5, 1, 'Aidan', 'Ferguson', 'aidan.ferguson@example.com', '07801 123456', '1983-02-15', 'All', '2023-01-01', 74.50, NULL, 25.00, NULL, 'Heart Disease'),
-    (3, 2, 'Niamh', 'Doherty', 'niamh.doherty@example.com', '07801 123457', '1992-03-20', 'SGPT', '2022-06-01', 62.30, 60.00, 19.50, 19.00, 'Obesity'),
-    (2, 3, 'Connor', 'McBride', 'connor.mcbride@example.com', '07801 123458', '1995-04-30', 'HIIT&Hyrox', '2023-03-15', 81.20, 79.00, 28.00, 27.50, 'Asthma'),
-    (1, 4, 'Clodagh', 'Hughes', 'clodagh.hughes@example.com', '07801 123459', '1988-06-05', 'Boxing', '2022-09-10', 55.00, NULL, 22.00, NULL, NULL),
-    (4, 5, 'Ronan', 'Neill', 'ronan.neill@example.com', '07801 123460', '1990-08-22', 'All', '2023-02-01', 68.75, 66.00, 20.00, 19.50, 'Diabetes'),
-    (5, 6, 'Sinead', 'Murray', 'sinead.murray@example.com', '07801 123461', '1994-05-14', 'SGPT', '2022-07-15', 72.60, 70.25, 26.00, 25.50, 'High Cholesterol'),
-    (2, 7, 'Seamus', 'Boyle', 'seamus.boyle@example.com', '07801 123462', '1986-11-11', 'HIIT&Hyrox', '2023-05-10', 78.80, 76.00, 27.00, 26.50, 'High Blood Pressure'),
-    (2, 8, 'Fiona', 'Collins', 'fiona.collins@example.com', '07801 123463', '1991-02-21', 'Boxing', '2022-11-20', 65.00, NULL, 21.00, NULL, 'Osteoperosis'),
-    (3, 9, 'Ethan', 'Graham', 'ethan.graham@example.com', '07801 123464', '1989-10-10', 'All', '2023-01-15', 85.00, 83.50, 32.00, 31.50, 'Scoliosis'),
-    (4, 10, 'Orla', 'McCarthy', 'orla.mccarthy@example.com', '07801 123465', '1996-07-12', 'SGPT', '2022-12-05', 59.00, NULL, 18.00, NULL, NULL);
+    (5, 1, 'Aidan', 'Ferguson', 'aidan.ferguson@example.com', '07801 123456', '1983-02-15', 'All', '2023-01-01'),
+    (3, 2, 'Niamh', 'Doherty', 'niamh.doherty@example.com', '07801 123457', '1992-03-20', 'SGPT', '2022-06-01'),
+    (2, 3, 'Connor', 'McBride', 'connor.mcbride@example.com', '07801 123458', '1995-04-30', 'HIIT&Hyrox', '2023-03-15'),
+    (1, 4, 'Clodagh', 'Hughes', 'clodagh.hughes@example.com', '07801 123459', '1988-06-05', 'Boxing', '2022-09-10'),
+    (4, 5, 'Ronan', 'Neill', 'ronan.neill@example.com', '07801 123460', '1990-08-22', 'All', '2023-02-01'),
+    (5, 6, 'Sinead', 'Murray', 'sinead.murray@example.com', '07801 123461', '1994-05-14', 'SGPT', '2022-07-15'),
+    (2, 7, 'Seamus', 'Boyle', 'seamus.boyle@example.com', '07801 123462', '1986-11-11', 'HIIT&Hyrox', '2023-05-10'),
+    (2, 8, 'Fiona', 'Collins', 'fiona.collins@example.com', '07801 123463', '1991-02-21', 'Boxing', '2022-11-20'),
+    (3, 9, 'Ethan', 'Graham', 'ethan.graham@example.com', '07801 123464', '1989-10-10', 'All', '2023-01-15'),
+    (4, 10, 'Orla', 'McCarthy', 'orla.mccarthy@example.com', '07801 123465', '1996-07-12', 'SGPT', '2022-12-05');
+
+INSERT INTO tblMeasurement VALUES
+    (1, 76.54, 81.2, 75.2, 80.5, 'Heart Disease'),
+    (2, 85.10, 89.40, 73.80, 78.50, 'Obesity'),
+    (3, 91.25, 95.80, 82.50, 87.35, 'Asthma'),
+    (4, 64.75, 68.20, 55.90, 59.10, NULL),
+    (5, 78.60, 82.00, 68.30, 73.70, 'Diabetes'),
+    (6, 74.90, 77.60, 63.00, 65.80, 'High Cholesterol'),
+    (7, 100.12, 103.45, 90.00, 93.25, 'Osteoperosis'),
+    (8, 79.30, 83.50, 70.10, 74.20, 'Scoliosis'),
+    (9, 88.15, 91.80, 77.60, 81.40, NULL),
+    (10, 96.45, 99.60, 84.50, 88.30, 'High Blood Pressure');
 
 INSERT INTO tblClass VALUES
     (3, 1, 'Morning SGPT', 'SGPT', '2023-03-01', '09:00:00', '10:00:00'),

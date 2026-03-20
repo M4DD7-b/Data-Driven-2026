@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS tblCoachCentre;
 DROP TABLE IF EXISTS tblReservation;
 DROP TABLE IF EXISTS tblCoach;
 DROP TABLE IF EXISTS tblMember;
+DROP TABLE IF EXISTS tblMeasurement;
 DROP TABLE IF EXISTS tblClass;
 DROP TABLE IF EXISTS tblCentre;
 
@@ -40,12 +41,17 @@ CREATE TABLE tblMember (
     memberDOB DATE NOT NULL,
     membershipType VARCHAR(10) NOT NULL CHECK (membershipType IN ('All', 'SGPT', 'HIIT&Hyrox', 'Boxing')),
     membershipStartDate DATE NOT NULL,
-    memberStartWeight DECIMAL(3, 2) NOT NULL,
-    memberCurrentWeight DECIMAL(3, 2) DEFAULT NULL,
-    memberStartMuscleMass DECIMAL(2, 2) NOT NULL,
-    memberCurrentMuscleMass DECIMAL(2, 2) DEFAULT NULL,
-    memberCondition VARCHAR(100) DEFAULT NULL,
     FOREIGN KEY (homeCentreId) REFERENCES tblCentre(centreId)
+);
+
+CREATE TABLE tblMeasurement (
+    memberId INT(8),
+    memberStartWeight DECIMAL(5, 2) NOT NULL,
+    memberCurrentWeight DECIMAL(5, 2) DEFAULT NULL,
+    memberStartMuscleMass DECIMAL(5, 2) NOT NULL,
+    memberCurrentMuscleMass DECIMAL(5, 2) DEFAULT NULL,
+    memberCondition VARCHAR(100) DEFAULT NULL,
+    FOREIGN KEY (memberId) REFERENCES tblMember(memberId)
 );
 
 CREATE TABLE tblClass (
