@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --bg-dark: oklch(0.92 0.06 281);
+    --bg: oklch(0.96 0.06 281);
+    --bg-light: oklch(1 0.06 281);
+    --text: oklch(0.15 0.12 281);
+    --text-muted: oklch(0.4 0.12 281);
+    --highlight: oklch(1 0.12 281);
+    --border: oklch(0.6 0.12 281);
+    --border-muted: oklch(0.7 0.12 281);
+    --primary: oklch(0.4 0.12 281);
+    --secondary: oklch(84.639% 0.03609 290.86);
+    --danger: oklch(0.5 0.12 30);
+    --warning: oklch(0.5 0.12 100);
+    --success: oklch(0.5 0.12 160);
+    --info: oklch(0.5 0.12 260);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    text-align: center;
+    line-height: 1.5;
+    padding: 30px;
+
+    background-color: var(--bg-dark);
+    font-family: "Montserrat";
+}
+
+.page {
+    max-width: 760px;
+    margin: 40px auto;
+    background-color: var(--bg-light);
+
+    border-radius: 8px 8px 8px 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+a {
+    margin: 0px 8px 0px 0px;
+    color: var(--nav-link);
+    transition: color 0.3s;
+}
+
+.back {
+    text-align: left;
+}
+
+a:hover {
+    color: var(--border-muted);
+}
+
+h2 {
+    color: var(--primary);
+}
+
+.main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    border-radius: 8px 8px 0px 0px;
+    background-color: var(--bg);
+    color: var(--text);
+}
+
+.createForm {
+    padding: 25px;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.form-row > label {
+    width: 260px;
+    text-align: right;
+}
+
+input {
+    padding: 8px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    width: 200px;
+}
+
+button {
+    background-color: var(--primary);
+    color: var(--bg-light);
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    margin: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: var(--bg);
+    color: var(--primary);
+}
+

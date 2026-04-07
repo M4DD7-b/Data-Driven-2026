@@ -1,9 +1,9 @@
 DROP TABLE IF EXISTS tblCoachCentre;
 DROP TABLE IF EXISTS tblReservation;
-DROP TABLE IF EXISTS tblCoach;
-DROP TABLE IF EXISTS tblMember;
 DROP TABLE IF EXISTS tblMeasurement;
 DROP TABLE IF EXISTS tblClass;
+DROP TABLE IF EXISTS tblCoach;
+DROP TABLE IF EXISTS tblMember;
 DROP TABLE IF EXISTS tblCentre;
 
 CREATE TABLE tblCentre (
@@ -45,7 +45,7 @@ CREATE TABLE tblMember (
 );
 
 CREATE TABLE tblMeasurement (
-    memberId INT(8),
+    memberId INT(8) UNIQUE,
     memberStartWeight DECIMAL(5, 2) NOT NULL,
     memberCurrentWeight DECIMAL(5, 2) DEFAULT NULL,
     memberStartMuscleMass DECIMAL(5, 2) NOT NULL,
@@ -56,13 +56,15 @@ CREATE TABLE tblMeasurement (
 
 CREATE TABLE tblClass (
     centreId INT(8),
+    coachId INT(8),
     classId INT(8) PRIMARY KEY AUTO_INCREMENT NOT NULL,
     className VARCHAR(100) NOT NULL,
     classCategory VARCHAR(50) NOT NULL CHECK (classCategory IN ('SGPT', 'HIIT', 'Boxing', 'Hyrox')),
     classDate DATE NOT NULL,
     classStartTime TIME NOT NULL,
     classEndTime TIME NOT NULL,
-    FOREIGN KEY (centreId) REFERENCES tblCentre(centreId)
+    FOREIGN KEY (centreId) REFERENCES tblCentre(centreId),
+    FOREIGN KEY (coachId) REFERENCES tblCoach(coachId)
 );
 
 CREATE TABLE tblReservation (

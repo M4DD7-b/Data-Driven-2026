@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Benchmark Sports</title>
+        <link rel="stylesheet" href="../CSS/addStyle.css">
+    </head>
+    <body>
+        <div class="page">
+
+            <div class="main">
+                <div class="back">
+                    <a id ="back" href="../HTML/add.html">Back to Add Menu</a>
+                </div>
+                <h2>Create Reservation</h2>
+                <p>
+                    Enter details below:
+                </p>
+
+            </div>
+
+            <form id="reservationForm" class="createForm">
+                <div class="form-row">
+                    <label for="classId">Class ID</label>
+                    <input type="number" id="classId" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="memberId">Member ID</label>
+                    <input type="number" id="memberId" required>
+                </div>
+
+                <button type="submit">Add Reservation</button>
+            </form>
+
+            <!-- This empty box is filled with success or error messages by JavaScript. -->
+            <div id="output" class="message"></div>
+            
+        </div>
+
+        <script src="../JS/addReservationScript.js"></script>
+        <script>
+            const showMessage = (text, type) => {
+                const output = document.getElementById("output");
+                output.textContent = text;
+                output.className = `message ${type}`;
+            };
+
+            document.querySelector("#reservationForm").addEventListener("submit", async (event) => {
+                event.preventDefault();
+
+                const reservation = {
+                    classId: document.getElementById("classId").value,
+                    memberId: document.getElementById("memberId").value
+                };
+
+                const validationMessage = validateReservation(reservation);
+                if (validationMessage) {
+                    showMessage(validationMessage, "error");
+                    return;
+                };
+
+                const sql = `INSERT INTO tblReservation (classId, memberId) VALUES (
+                    ${reservation.classId}, 
+                    ${reservation.memberId});`;
+
+                console.log(sql);
+
+                const result = await runQuery(sql);
+
+                if (result && result.success) {
+                    showMessage("Reservation added successfully!", "success");
+                    form.reset();
+                    return;
+                }
+
+                if (result && result.error) {
+                    showMessage(`Error: ${result.error}`, "error");
+                } else {
+                    showMessage("Unable to add the record", "error");
+                }
+            });
+        </script>
+    </body>
+
+</html>

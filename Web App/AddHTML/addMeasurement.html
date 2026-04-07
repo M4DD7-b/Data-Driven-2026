@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Benchmark Sports</title>
+        <link rel="stylesheet" href="../CSS/addStyle.css">
+    </head>
+    <body>
+        <div class="page">
+
+            <div class="main">
+                <div class="back">
+                    <a id ="back" href="../HTML/add.html">Back to Add Menu</a>
+                </div>
+                <h2>Create Measurement</h2>
+                <p>
+                    Enter details below:
+                </p>
+
+            </div>
+
+            <form id="measurementForm" class="createForm">
+
+                <div class="form-row">
+                    <label for="memberId">Member ID</label>
+                    <input type="number" id="memberId" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="memberStartWeight">Member Start Weight</label>
+                    <input type="number" step="0.01" id="memberStartWeight" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="memberCurrentWeight">Member Current Weight</label>
+                    <input type="number" step="0.01" id="memberCurrentWeight" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="memberStartMuscleMass">Member Start Muscle Mass</label>
+                    <input type="number" step="0.01" id="memberStartMuscleMass" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="memberCurrentMuscleMass">Member Current Muscle Mass</label>
+                    <input type="number" step="0.01" id="memberCurrentMuscleMass" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="memberCondition">Member Condition</label>
+                    <input type="text" id="memberCondition">
+                </div>
+
+                <button type="submit">Add Measurement</button>
+            </form>
+
+            <!-- This empty box is filled with success or error messages by JavaScript. -->
+            <div id="output" class="message"></div>
+            
+        </div>
+
+        <script src="../JS/addMeasurementScript.js"></script>
+        <script>
+            const showMessage = (text, type) => {
+                const output = document.getElementById("output");
+                output.textContent = text;
+                output.className = `message ${type}`;
+            };
+
+            document.querySelector("#measurementForm").addEventListener("submit", async (event) => {
+                event.preventDefault();
+
+                const measurement = {
+                    memberId: document.getElementById("memberId").value,
+                    memberStartWeight: document.getElementById("memberStartWeight").value,
+                    memberCurrentWeight: document.getElementById("memberCurrentWeight").value,
+                    memberStartMuscleMass: document.getElementById("memberStartMuscleMass").value,
+                    memberCurrentMuscleMass: document.getElementById("memberCurrentMuscleMass").value,
+                    memberCondition: document.getElementById("memberCondition").value
+                };
+
+                const validationMessage = validateMeasurement(measurement);
+                if (validationMessage) {
+                    showMessage(validationMessage, "error");
+                    return;
+                };
+
+                const sql = `INSERT INTO tblMeasurement (memberId, memberStartWeight, memberCurrentWeight, memberStartMuscleMass, memberCurrentMuscleMass, memberCondition) VALUES (
+                    ${measurement.memberId},
+                    ${measurement.memberStartWeight},
+                    ${measurement.memberCurrentWeight},
+                    ${measurement.memberStartMuscleMass},
+                    ${measurement.memberCurrentMuscleMass},
+                    '${measurement.memberCondition}');`;
+
+                console.log(sql);
+
+                const result = await runQuery(sql);
+
+                if (result && result.success) {
+                    showMessage("Measurement added successfully!", "success");
+                    form.reset();
+                    return;
+                }
+
+                if (result && result.error) {
+                    showMessage(`Error: ${result.error}`, "error");
+                } else {
+                    showMessage("Unable to add the record", "error");
+                }
+            });
+        </script>
+    </body>
+
+</html>

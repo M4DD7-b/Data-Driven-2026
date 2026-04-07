@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", async () => {
-        const url = "http://localhost/mbrum/dbConnectorDefault.php";
+        const url = "http://localhost/dbConnector.php";
         const output = document.querySelector("#output");
         const sql = "SELECT * FROM tblMeasurement;";
 

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Benchmark Sports</title>
+        <link rel="stylesheet" href="../CSS/addStyle.css">
+    </head>
+    <body>
+        <div class="page">
+
+            <div class="main">
+                <div class="back">
+                    <a id ="back" href="../HTML/add.html">Back to Add Menu</a>
+                </div>
+                <h2>Create Coach</h2>
+                <p>
+                    Enter details below:
+                </p>
+
+            </div>
+
+            <form id="coachForm" class="createForm">
+
+                <div class="form-row">
+                    <label for="coachId">Coach ID</label>
+                    <input type="number" id="coachId" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="coachForename">Coach Forename</label>
+                    <input type="text" id="coachForename" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="coachSurname">Coach Surname</label>
+                    <input type="text" id="coachSurname" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="coachEmail">Coach Email</label>
+                    <input type="email" id="coachEmail" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="coachPhone">Coach Phone</label>
+                    <input type="text" id="coachPhone" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="coachSpecialisation">Coach Specialty</label>
+                    <input type="text" id="coachSpecialisation" required>
+                </div>
+
+                <button type="submit">Add Coach</button>
+            </form>
+
+            <!-- This empty box is filled with success or error messages by JavaScript. -->
+            <div id="output" class="message"></div>
+            
+        </div>
+
+        <script src="../JS/addCoachScript.js"></script>
+        <script>
+            const showMessage = (text, type) => {
+                const output = document.getElementById("output");
+                output.textContent = text;
+                output.className = `message ${type}`;
+            };
+
+            document.querySelector("#coachForm").addEventListener("submit", async (event) => {
+                event.preventDefault();
+
+                const coach = {
+                    coachId: document.getElementById("coachId").value,
+                    coachForename: document.getElementById("coachForename").value,
+                    coachSurname: document.getElementById("coachSurname").value,
+                    coachEmail: document.getElementById("coachEmail").value,
+                    coachPhone: document.getElementById("coachPhone").value,
+                    coachSpecialisation: document.getElementById("coachSpecialisation").value
+                };
+
+                const validationMessage = validateCoach(coach);
+                if (validationMessage) {
+                    showMessage(validationMessage, "error");
+                    return;
+                };
+
+                const sql = `INSERT INTO tblCoach (coachId, coachForename, coachSurname, coachEmail, coachPhone, coachSpecialisation) VALUES (
+                    ${coach.coachId},
+                    '${coach.coachForename}',
+                    '${coach.coachSurname}',
+                    '${coach.coachEmail}',
+                    '${coach.coachPhone}',
+                    '${coach.coachSpecialisation}');`;
+
+                console.log(sql);
+
+                const result = await runQuery(sql);
+
+                if (result && result.success) {
+                    showMessage("Coach added successfully!", "success");
+                    form.reset();
+                    return;
+                }
+
+                if (result && result.error) {
+                    showMessage(`Error: ${result.error}`, "error");
+                } else {
+                    showMessage("Unable to add the record", "error");
+                }
+            });
+        </script>
+    </body>
+
+</html>

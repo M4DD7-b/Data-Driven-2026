@@ -89,3 +89,13 @@ td, th {
     border: solid 1px var(--text);
     padding: 10px;
 }
+
+#output {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+ul {
+    list-style: circle;
+    padding-left: 25px;
+}

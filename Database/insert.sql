@@ -60,16 +60,16 @@ INSERT INTO tblMeasurement VALUES
     (10, 96.45, 99.60, 84.50, 88.30, 'High Blood Pressure');
 
 INSERT INTO tblClass VALUES
-    (3, 1, 'Morning SGPT', 'SGPT', '2023-03-01', '09:00:00', '10:00:00'),
-    (2, 2, 'Evening HIIT', 'HIIT', '2023-03-02', '18:00:00', '19:00:00'),
-    (4, 3, 'Boxing Fundamentals', 'Boxing', '2023-03-03', '17:00:00', '18:00:00'),
-    (5, 4, 'Hyrox Training', 'Hyrox', '2023-03-04', '11:00:00', '12:30:00'),
-    (1, 5, 'Advanced SGPT', 'SGPT', '2023-03-05', '10:30:00', '11:30:00'),
-    (2, 6, 'HIIT for Beginners', 'HIIT', '2023-03-06', '19:30:00', '20:30:00'),
-    (3, 7, 'Boxing Conditioning', 'Boxing', '2023-03-07', '16:00:00', '17:00:00'),
-    (4, 8, 'Hyrox Endurance', 'Hyrox', '2023-03-08', '12:00:00', '13:30:00'),
-    (5, 9, 'Weekend SGPT', 'SGPT', '2023-03-09', '08:00:00', '09:00:00'),
-    (1, 10, 'Boxing Sparring', 'Boxing', '2023-03-10', '17:30:00', '18:30:00');
+    (3, 2, 1, 'Morning SGPT', 'SGPT', '2023-03-01', '09:00:00', '10:00:00'),
+    (2, 5, 2, 'Evening HIIT', 'HIIT', '2023-03-02', '18:00:00', '19:00:00'),
+    (4, 8, 3, 'Boxing Fundamentals', 'Boxing', '2023-03-03', '17:00:00', '18:00:00'),
+    (5, 3, 4, 'Hyrox Training', 'Hyrox', '2023-03-04', '11:00:00', '12:30:00'),
+    (1, 4, 5, 'Advanced SGPT', 'SGPT', '2023-03-05', '10:30:00', '11:30:00'),
+    (2, 7,6, 'HIIT for Beginners', 'HIIT', '2023-03-06', '19:30:00', '20:30:00'),
+    (3, 1, 7, 'Boxing Conditioning', 'Boxing', '2023-03-07', '16:00:00', '17:00:00'),
+    (4, 6, 8, 'Hyrox Endurance', 'Hyrox', '2023-03-08', '12:00:00', '13:30:00'),
+    (5, 2, 9, 'Weekend SGPT', 'SGPT', '2023-03-09', '08:00:00', '09:00:00'),
+    (1, 3, 10, 'Boxing Sparring', 'Boxing', '2023-03-10', '17:30:00', '18:30:00');
 
 INSERT INTO tblReservation VALUES
     (1, 10),
