@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Benchmark Sports</title>
+        <link rel="stylesheet" href="../CSS/style.css">
+    </head>
+    <body>
+        <div class="page">
+
+            <div class="add-main">
+                <div class="back">
+                    <a id ="back" href="../HTML/add.html">Back to Add Menu</a>
+                </div>
+                <h2>Create Member</h2>
+                <p>
+                    Enter details below:
+                </p>
+
+            </div>
+
+            <form id="memberForm" class="createForm">
+
+                <div class="form-row">
+                    <label for="homeCentreId">Centre ID</label>
+                    <input type="number" id="homeCentreId" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="memberId">Member ID</label>
+                    <input type="number" id="memberId" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="memberForename">Member Forename</label>
+                    <input type="text" id="memberForename" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="memberSurname">Member Surname</label>
+                    <input type="text" id="memberSurname" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="memberEmail">Member Email</label>
+                    <input type="email" id="memberEmail" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="memberPhone">Member Phone</label>
+                    <input type="tel" id="memberPhone" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="memberDOB">Member Date of Birth</label>
+                    <input type="date" id="memberDOB" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="membershipType">Membership Type</label>
+                    <input type="text" id="membershipType" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="membershipStartDate">Membership Start Date</label>
+                    <input type="date" id="membershipStartDate" required>
+                </div>
+
+                <button type="submit">Add Member</button>
+            </form>
+
+            <!-- This empty box is filled with success or error messages by JavaScript. -->
+            <div id="output" class="message"></div>
+            
+        </div>
+
+        <script src="../JS/addClassScript.js"></script>
+        <script>
+            const showMessage = (text, type) => {
+                const output = document.getElementById("output");
+                output.textContent = text;
+                output.className = `message ${type}`;
+            };
+
+            document.querySelector("#memberForm").addEventListener("submit", async (event) => {
+                event.preventDefault();
+
+                const member = {
+                    homeCentreId: document.getElementById("homeCentreId").value,
+                    memberId: document.getElementById("memberId").value,
+                    memberForename: document.getElementById("memberForename").value,
+                    memberSurname: document.getElementById("memberSurname").value,
+                    memberEmail: document.getElementById("memberEmail").value,
+                    memberPhone: document.getElementById("memberPhone").value,
+                    memberDOB: document.getElementById("memberDOB").value,
+                    membershipType: document.getElementById("membershipType").value,
+                    membershipStartDate: document.getElementById("membershipStartDate").value
+                };
+
+                const validationMessage = validateMember(member);
+                if (validationMessage) {
+                    showMessage(validationMessage, "error");
+                    return;
+                };
+
+                const sql = `INSERT INTO tblMember (homeCentreId, memberId, memberForename, memberSurname, memberEmail, memberPhone, memberDOB, membershipType, membershipStartDate) VALUES (
+                    ${member.homeCentreId},
+                    '${member.memberId}',
+                    '${member.memberForename}',
+                    '${member.memberSurname}',
+                    '${member.memberEmail}',
+                    '${member.memberPhone}',
+                    '${member.memberDOB}',
+                    '${member.membershipType}',
+                    '${member.membershipStartDate}');`;
+
+                console.log(sql);
+
+                const result = await runQuery(sql);
+
+                if (result && result.success) {
+                    showMessage("Member added successfully!", "success");
+                    form.reset();
+                    return;
+                }
+
+                if (result && result.error) {
+                    showMessage(`Error: ${result.error}`, "error");
+                } else {
+                    showMessage("Unable to add the record", "error");
+                }
+            });
+        </script>
+    </body>
+
+</html>

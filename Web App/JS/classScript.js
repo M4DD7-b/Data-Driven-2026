@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         classEndTimeCell.textContent = session.classEndTime;
         row.appendChild(classEndTimeCell);
 
-        table.appendChild(row);
+      table.appendChild(row);
     }
 
     output.appendChild(table);

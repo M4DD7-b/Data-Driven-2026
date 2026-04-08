@@ -17,7 +17,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
     }
     
-
     const table = document.createElement("table");
     const headerRow = document.createElement("tr");
 

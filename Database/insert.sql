@@ -1,9 +1,9 @@
 DELETE FROM tblCoachCentre;
 DELETE FROM tblReservation;
-DELETE FROM tblCoach;
 DELETE FROM tblMeasurement;
 DELETE FROM tblMember;
 DELETE FROM tblClass;
+DELETE FROM tblCoach;
 DELETE FROM tblCentre;
 
 INSERT INTO tblCentre VALUES

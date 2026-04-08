@@ -75,4 +75,4 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     output.appendChild(table);
 
-});
+  });
