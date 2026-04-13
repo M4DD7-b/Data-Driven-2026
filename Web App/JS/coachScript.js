@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const table = document.createElement("table");
     const headerRow = document.createElement("tr");
 
-    const headings = ["Coach ID", "Coach Forename", "Coach Surname", "Coach Email", "Coach Phone", "Coach Specialisation", "Edit"];
+    const headings = ["Coach ID", "Coach Forename", "Coach Surname", "Coach Email", "Coach Phone", "Coach Specialisation", "Edit", "Delete"];
 
     for (const heading of headings) {
         const th = document.createElement("th");
