@@ -1,0 +1,5 @@
+# Ignore my vscode config file for connection due to my stupid plugin being wierd
+main.**
+
+# Ignore the .vscode folder for connection settings
+.vscode/

@@ -23,11 +23,6 @@
             <form id="coachForm" class="createForm">
 
                 <div class="form-row">
-                    <label for="coachId">Coach ID</label>
-                    <input type="number" id="coachId" required>
-                </div>
-
-                <div class="form-row">
                     <label for="coachForename">Coach Forename</label>
                     <input type="text" id="coachForename" required>
                 </div>
@@ -68,11 +63,12 @@
                 output.className = `message ${type}`;
             };
 
-            document.querySelector("#coachForm").addEventListener("submit", async (event) => {
+            const form = document.querySelector("#coachForm");
+
+            form.addEventListener("submit", async (event) => {
                 event.preventDefault();
 
                 const coach = {
-                    coachId: document.getElementById("coachId").value,
                     coachForename: document.getElementById("coachForename").value,
                     coachSurname: document.getElementById("coachSurname").value,
                     coachEmail: document.getElementById("coachEmail").value,
@@ -86,8 +82,7 @@
                     return;
                 };
 
-                const sql = `INSERT INTO tblCoach (coachId, coachForename, coachSurname, coachEmail, coachPhone, coachSpecialisation) VALUES (
-                    ${coach.coachId},
+                const sql = `INSERT INTO tblCoach (coachForename, coachSurname, coachEmail, coachPhone, coachSpecialisation) VALUES (
                     '${coach.coachForename}',
                     '${coach.coachSurname}',
                     '${coach.coachEmail}',

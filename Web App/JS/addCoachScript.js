@@ -32,17 +32,12 @@
       }
 
       // Clean up and convert values first so the checks below are easier to write.
-      const coachId = Number(coach.coachId);
       const coachForename = typeof coach.coachForename === "string" ? coach.coachForename.trim() : "";
       const coachSurname = typeof coach.coachSurname === "string" ? coach.coachSurname.trim() : "";
       const coachEmail = typeof coach.coachEmail === "string" ? coach.coachEmail.trim() : "";
       const coachPhone = typeof coach.coachPhone === "string" ? coach.coachPhone.trim() : "";
       const coachSpecialisation = typeof coach.coachSpecialisation === "string" ? coach.coachSpecialisation.trim() : "";
-
-      if (!Number.isInteger(coachId) || coachId < 1) {
-        return "Coach ID must be a whole number greater than 0.";
-      }
-
+      
       if (!coachForename || coachForename.length > 50) {
         return "Coach Forename is required and cannot exceed 50 characters.";
       }

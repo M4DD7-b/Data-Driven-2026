@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Benchmark Sports</title>
+        <link rel="stylesheet" href="../CSS/style.css">
+    </head>
+    <body>
+        <div class="page">
+
+            <div class="add-main">
+                <div class="back">
+                    <a id ="back" href="../HTML/coachList.html">Back to Coach Menu</a>
+                </div>
+                <h2>Edit Coach</h2>
+                <p>
+                    Update the coach's details below:
+                </p>
+
+            </div>
+
+            <form id="coachForm" class="createForm">
+
+                <div class="form-row">
+                    <label for="coachForename">Coach Forename</label>
+                    <input type="text" id="coachForename" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="coachSurname">Coach Surname</label>
+                    <input type="text" id="coachSurname" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="coachEmail">Coach Email</label>
+                    <input type="email" id="coachEmail" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="coachPhone">Coach Phone</label>
+                    <input type="text" id="coachPhone" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="coachSpecialisation">Coach Specialty</label>
+                    <input type="text" id="coachSpecialisation" required>
+                </div>
+
+                <button type="submit">Update Coach Data</button>
+            </form>
+
+            <!-- This empty box is filled with success or error messages by JavaScript. -->
+            <div id="output" class="message"></div>
+            
+        </div>
+
+        <script src="../JS/editCoachScript.js"></script>
+    </body>
+</html> 
