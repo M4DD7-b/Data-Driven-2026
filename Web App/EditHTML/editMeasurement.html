@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Benchmark Sports</title>
+        <link rel="stylesheet" href="../CSS/style.css">
+    </head>
+    <body>
+        <div class="page">
+
+            <div class="add-main">
+                <div class="back">
+                    <a id ="back" href="../HTML/measurement.html">Back to Measurement Menu</a>
+                </div>
+                <h2>Edit Measurement</h2>
+                <p>
+                    Update the measurement's details below:
+                </p>
+
+            </div>
+
+            <form id="classForm" class="createForm">
+
+                <div class="form-row">
+                    <label for="memberStartWeight">Member Start Weight</label>
+                    <input type="number" id="memberStartWeight" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="memberCurrentWeight">Member Current Weight</label>
+                    <input type="number" id="memberCurrentWeight" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="memberStartMuscleMass">Member Start Muscle Mass</label>
+                    <input type="number" id="memberStartMuscleMass" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="memberCondition">Member Condition</label>
+                    <input type="text" id="memberCondition" required>
+                </div>
+                </div>
+
+                <button type="submit">Update Measurement Data</button>
+            </form>
+
+            <!-- This empty box is filled with success or error messages by JavaScript. -->
+            <div id="output" class="message"></div>
+            
+        </div>
+
+        <script src="../JS/editMeasurementScript.js"></script>
+    </body>
+</html> 

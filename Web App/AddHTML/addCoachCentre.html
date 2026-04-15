@@ -13,25 +13,26 @@
                 <div class="back">
                     <a id ="back" href="../HTML/add.html">Back to Edit Menu</a>
                 </div>
-                <h2>Create Reservation</h2>
+                <h2>Create Coach Assignment</h2>
                 <p>
                     Enter details below:
                 </p>
 
             </div>
 
-            <form id="reservationForm" class="createForm">
+            <form id="coachCentreForm" class="createForm">
+
                 <div class="form-row">
-                    <label for="classId">Class ID</label>
-                    <input type="number" id="classId" required>
+                    <label for="coachId">Coach ID</label>
+                    <input type="number" id="coachId" required>
                 </div>
 
                 <div class="form-row">
-                    <label for="memberId">Member ID</label>
-                    <input type="number" id="memberId" required>
+                    <label for="centreId">Centre ID</label>
+                    <input type="number" id="centreId" required>
                 </div>
 
-                <button type="submit">Add Reservation</button>
+                <button type="submit">Add Coach</button>
             </form>
 
             <!-- This empty box is filled with success or error messages by JavaScript. -->
@@ -39,7 +40,7 @@
             
         </div>
 
-        <script src="../JS/addReservationScript.js"></script>
+        <script src="../JS/addCoachCentreScript.js"></script>
         <script>
             const showMessage = (text, type) => {
                 const output = document.getElementById("output");
@@ -47,30 +48,31 @@
                 output.className = `message ${type}`;
             };
 
-            document.querySelector("#reservationForm").addEventListener("submit", async (event) => {
+            document.querySelector("#coachCentreForm").addEventListener("submit", async (event) => {
                 event.preventDefault();
 
-                const reservation = {
-                    classId: document.getElementById("classId").value,
-                    memberId: document.getElementById("memberId").value
+                const coachCentre = {
+                    coachId: document.getElementById("coachId").value,
+                    centreId: document.getElementById("centreId").value,
                 };
 
-                const validationMessage = validateReservation(reservation);
+                const validationMessage = validateCoachCentre(coachCentre);
                 if (validationMessage) {
                     showMessage(validationMessage, "error");
                     return;
                 };
 
-                const sql = `INSERT INTO tblReservation (classId, memberId) VALUES (
-                    ${reservation.classId}, 
-                    ${reservation.memberId});`;
+                const sql = `INSERT INTO tblCoachCentre (coachId, centreId) VALUES (
+                    ${coachCentre.coachId},
+                    ${coachCentre.centreId}
+                )`;
 
                 console.log(sql);
 
                 const result = await runQuery(sql);
 
                 if (result && result.success) {
-                    showMessage("Reservation added successfully!", "success");
+                    showMessage("Coach assigned to centre successfully!", "success");
                     form.reset();
                     return;
                 }

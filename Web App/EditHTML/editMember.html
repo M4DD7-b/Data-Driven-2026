@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Benchmark Sports</title>
+        <link rel="stylesheet" href="../CSS/style.css">
+    </head>
+    <body>
+        <div class="page">
+
+            <div class="add-main">
+                <div class="back">
+                    <a id ="back" href="../HTML/member.html">Back to Member Menu</a>
+                </div>
+                <h2>Edit Member</h2>
+                <p>
+                    Update the member's details below:
+                </p>
+
+            </div>
+
+            <form id="memberForm" class="createForm">
+
+                <div class="form-row">
+                    <label for="memberForename">Member Name</label>
+                    <input type="text" id="memberForename" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="memberSurname">Member Surname</label>
+                    <input type="text" id="memberSurname" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="memberEmail">Member Email</label>
+                    <input type="email" id="memberEmail" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="memberPhone">Member Phone</label>
+                    <input type="tel" id="memberPhone" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="memberDateOfBirth">Member Date of Birth</label>
+                    <input type="date" id="memberDateOfBirth" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="memberDateOfBirth">Member Date of Birth</label>
+                    <input type="date" id="memberDateOfBirth" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="memberType">Member Type</label>
+                    <input type="text" id="memberType" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="membershipStartDate">Membership Start Date</label>
+                    <input type="date" id="membershipStartDate" required>
+                </div>
+                </div>
+
+                <button type="submit">Update Member Data</button>
+            </form>
+
+            <!-- This empty box is filled with success or error messages by JavaScript. -->
+            <div id="output" class="message"></div>
+            
+        </div>
+
+        <script src="../JS/editMemberScript.js"></script>
+    </body>
+</html> 

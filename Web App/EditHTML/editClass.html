@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Benchmark Sports</title>
+        <link rel="stylesheet" href="../CSS/style.css">
+    </head>
+    <body>
+        <div class="page">
+
+            <div class="add-main">
+                <div class="back">
+                    <a id ="back" href="../HTML/class.html">Back to Class Menu</a>
+                </div>
+                <h2>Edit Class</h2>
+                <p>
+                    Update the class's details below:
+                </p>
+
+            </div>
+
+            <form id="classForm" class="createForm">
+
+                <div class="form-row">
+                    <label for="className">Class Name</label>
+                    <input type="text" id="className" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="classCategory">Class Category</label>
+                    <input type="text" id="classCategory" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="classDate">Class Date</label>
+                    <input type="date" id="classDate" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="classStartTime">Class Start Time</label>
+                    <input type="time" id="classStartTime" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="classEndTime">Class End Time</label>
+                    <input type="time" id="classEndTime" required>
+                </div>
+                </div>
+
+                <button type="submit">Update Class Data</button>
+            </form>
+
+            <!-- This empty box is filled with success or error messages by JavaScript. -->
+            <div id="output" class="message"></div>
+            
+        </div>
+
+        <script src="../JS/editClassScript.js"></script>
+    </body>
+</html> 

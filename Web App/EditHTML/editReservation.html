@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Benchmark Sports</title>
+        <link rel="stylesheet" href="../CSS/style.css">
+    </head>
+    <body>
+        <div class="page">
+
+            <div class="add-main">
+                <div class="back">
+                    <a id ="back" href="../HTML/reservation.html">Back to Reservation Menu</a>
+                </div>
+                <h2>Edit Reservation</h2>
+                <p>
+                    Update the reservation's details below:
+                </p>
+
+            </div>
+
+            <form id="classForm" class="createForm">
+
+                <div class="form-row">
+                    <label for="classId">Class ID</label>
+                    <input type="number" id="classId" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="memberId">Member ID</label>
+                    <input type="number" id="memberId" required>
+                </div>
+                </div>
+
+                <button type="submit">Update Reservation Data</button>
+            </form>
+
+            <!-- This empty box is filled with success or error messages by JavaScript. -->
+            <div id="output" class="message"></div>
+            
+        </div>
+
+        <script src="../JS/editReservationScript.js"></script>
+    </body>
+</html> 

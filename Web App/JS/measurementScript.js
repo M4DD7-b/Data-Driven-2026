@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const table = document.createElement("table");
     const headerRow = document.createElement("tr");
 
-    const headings = ["Member ID", "Member Start Weight", "Member Current Weight", "Member Start Muscle Mass", "Member Current Muscle Mass", "Member Condition", "Actions"];
+    const headings = ["Member ID", "Member Start Weight", "Member Current Weight", "Member Start Muscle Mass", "Member Current Muscle Mass", "Member Condition", "Edit", "Delete"];
 
     for (const heading of headings) {
         const th = document.createElement("th");
@@ -56,72 +56,58 @@ document.addEventListener("DOMContentLoaded", async () => {
         const memberConditionCell = document.createElement("td");
         memberConditionCell.textContent = measurement.memberCondition;
         row.appendChild(memberConditionCell);
+        const editCell = document.createElement("td");
+        const editButton = document.createElement("button");
+        editButton.textContent = "Edit";
+        editCell.appendChild(editButton);
+        row.appendChild(editCell);
+        editButton.addEventListener("click", () => {
+            window.location.href = `../EditHTML/editCoach.html?coachId=${coach.coachId}`;
+        });
 
-        const tdDelete = document.createElement("td");
+
+        const deleteCell = document.createElement("td");
         const deleteButton = document.createElement("button");
         deleteButton.textContent = "Delete";
+        deleteCell.appendChild(deleteButton);
+        row.appendChild(deleteCell);
         deleteButton.addEventListener("click", async () => {
-          // Ask the user to confirm before removing a row from the database.
-          const shouldDelete = confirm(`Delete measurement ${measurement.memberId}?`);
-          if (!shouldDelete) {
-            return;
-          }
+            if (!confirm("Are you sure you want to delete this coach?")) {
+                return;
+            }   
+            const deleteSql = `DELETE FROM tblCoach WHERE coachId = ${coach.coachId} LIMIT 1;`;
 
-          // Delete the selected row by matching its member ID.
-          const deleteSql = `DELETE FROM tblMeasurement WHERE memberId = ${measurement.memberId}`;
-          const deleteResult = await runQuery(deleteSql);
+            
+            const response = await fetch(url, {
+                method: "POST",
+                body: new URLSearchParams({
+                    query: deleteSql
+                })
+            });
 
-          if (deleteResult && deleteResult.success) {
-            const res = await runQuery(deleteSql);
-            showMessage("Measurement record deleted successfully.", "success");
-            printTable();
-            return res.ok;
-          }
-
-          if (deleteResult && deleteResult.error) {
-            showMessage(deleteResult.error, "error");
-          } else {
-            showMessage("Unable to delete the record.", "error");
-          }
+            const result = await response.json();
+            
+            if (!result || !result.success) {
+                console.log("Failed to delete coach.");
+                return;
+            }   
+            if (result.affected_rows === 0) {
+                console.log("No coach was deleted. It may have already been removed.");
+                return;
+            }
+            console.log(`result : ${JSON.stringify(result)}`);
+            console.log(result.affected_rows);
+            console.log("Coach deleted successfully!");
+            row.remove();
+            
         });
 
-      tdDelete.appendChild(deleteButton);
-      row.appendChild(tdDelete);
+    table.appendChild(row);
 
-     const showMessage = (text, type) => {
-        const output = document.getElementById("output");
-        output.textContent = text;
-        output.className = `message ${type}`;
-      };
-
-      const runQuery = async (sql) => {
-      try {
-        // This is the PHP endpoint that talks to the database for us.
-        const url = "http://localhost/dbConnector.php";
-
-        // Send the SQL statement in the body of a POST request.
-        const response = await fetch(url, {
-          method: "POST",
-          body: new URLSearchParams({ query: sql })
-        });
-
-        // Stop and report a problem if the web request itself failed.
-        if (!response.ok) {
-          throw new Error(`HTTP Error ${response.status}`);
-        }
-
-        // Convert the JSON text from PHP into a JavaScript object.
-        const result = await response.json();
-        return result;
-
-      } catch (error) {
-        // Log errors so they can be seen in the browser console during debugging.
-        console.log(error.message);
-      }
-    };
-
-        table.appendChild(row);
     }
 
     output.appendChild(table);
+    
 });
+
+
