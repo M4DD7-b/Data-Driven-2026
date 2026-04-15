@@ -33,7 +33,6 @@
 
       // Clean up and convert values first so the checks below are easier to write.
       const homeCentreId = Number(member.homeCentreId);
-      const memberId = Number(member.memberId);
       const memberForename = typeof member.memberForename === "string" ? member.memberForename.trim() : "";
       const memberSurname = typeof member.memberSurname === "string" ? member.memberSurname.trim() : "";
       const memberEmail = typeof member.memberEmail === "string" ? member.memberEmail.trim() : "";
@@ -46,13 +45,9 @@
         return "Home Centre ID must be a whole number greater than 0.";
       }
 
-      if (!Number.isInteger(memberId) || memberId < 1) {
-        return "Member ID must be a whole number greater than 0.";
-      }
-
       if (!memberForename || memberForename.length > 50) {
         return "Member Forename is required and must be 50 characters or fewer.";
-    }
+      }
 
       if (!memberSurname || memberSurname.length > 50) {
         return "Member Surname is required and must be 50 characters or fewer.";

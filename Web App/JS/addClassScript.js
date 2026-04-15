@@ -34,7 +34,6 @@
       // Clean up and convert values first so the checks below are easier to write.
       const centreId = Number(session.centreId);
       const coachId = Number(session.coachId);
-      const classId = Number(session.classId);
       const className = typeof session.className === "string" ? session.className.trim() : "";
       const classCategory = typeof session.classCategory === "string" ? session.classCategory.trim() : "";
       const classDate = typeof session.classDate === "string" ? session.classDate.trim() : "";
@@ -47,10 +46,6 @@
 
       if (!Number.isInteger(coachId) || coachId < 1) {
         return "Coach ID is required and must be a whole number greater than 0.";
-      }
-
-      if (!Number.isInteger(classId) || classId < 1) {
-        return "Class ID is required and must be a whole number greater than 0.";
       }
 
       if (!className || className.length > 100) {
