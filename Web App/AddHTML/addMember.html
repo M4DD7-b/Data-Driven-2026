@@ -23,47 +23,42 @@
             <form id="memberForm" class="createForm">
 
                 <div class="form-row">
-                    <label for="homeCentreId">Centre ID</label>
+                    <label for="homeCentreId">Centre ID<sup>*</sup></label>
                     <input type="number" id="homeCentreId" required>
                 </div>
 
                 <div class="form-row">
-                    <label for="memberId">Member ID</label>
-                    <input type="number" id="memberId" required>
-                </div>
-
-                <div class="form-row">
-                    <label for="memberForename">Member Forename</label>
+                    <label for="memberForename">Member Forename<sup>*</sup></label>
                     <input type="text" id="memberForename" required>
                 </div>
 
                 <div class="form-row">
-                    <label for="memberSurname">Member Surname</label>
+                    <label for="memberSurname">Member Surname<sup>*</sup></label>
                     <input type="text" id="memberSurname" required>
                 </div>
 
                 <div class="form-row">
-                    <label for="memberEmail">Member Email</label>
+                    <label for="memberEmail">Member Email<sup>*</sup></label>
                     <input type="email" id="memberEmail" required>
                 </div>
 
                 <div class="form-row">
-                    <label for="memberPhone">Member Phone</label>
+                    <label for="memberPhone">Member Phone<sup>*</sup></label>
                     <input type="tel" id="memberPhone" required>
                 </div>
 
                 <div class="form-row">
-                    <label for="memberDOB">Member Date of Birth</label>
+                    <label for="memberDOB">Member Date of Birth<sup>*</sup></label>
                     <input type="date" id="memberDOB" required>
                 </div>
 
                 <div class="form-row">
-                    <label for="membershipType">Membership Type</label>
+                    <label for="membershipType">Membership Type<sup>*</sup></label>
                     <input type="text" id="membershipType" required>
                 </div>
 
                 <div class="form-row">
-                    <label for="membershipStartDate">Membership Start Date</label>
+                    <label for="membershipStartDate">Membership Start Date<sup>*</sup></label>
                     <input type="date" id="membershipStartDate" required>
                 </div>
 
@@ -88,7 +83,6 @@
 
                 const member = {
                     homeCentreId: document.getElementById("homeCentreId").value,
-                    memberId: document.getElementById("memberId").value,
                     memberForename: document.getElementById("memberForename").value,
                     memberSurname: document.getElementById("memberSurname").value,
                     memberEmail: document.getElementById("memberEmail").value,
@@ -104,9 +98,8 @@
                     return;
                 };
 
-                const sql = `INSERT INTO tblMember (homeCentreId, memberId, memberForename, memberSurname, memberEmail, memberPhone, memberDOB, membershipType, membershipStartDate) VALUES (
+                const sql = `INSERT INTO tblMember (homeCentreId, memberForename, memberSurname, memberEmail, memberPhone, memberDOB, membershipType, membershipStartDate) VALUES (
                     ${member.homeCentreId},
-                    '${member.memberId}',
                     '${member.memberForename}',
                     '${member.memberSurname}',
                     '${member.memberEmail}',
