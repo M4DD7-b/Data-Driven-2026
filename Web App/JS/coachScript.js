@@ -1,12 +1,4 @@
 document.addEventListener("DOMContentLoaded", async () => {
-
-
-
-    document.querySelector(".add-button").addEventListener("click", () => {
-        window.location.href = "../AddHTML/addCoach.html";
-    });
-
-
     const url = "http://localhost/dbConnector.php";
     const output = document.querySelector("#output");
     const sql = "SELECT * FROM tblCoach;";
@@ -64,9 +56,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         coachSpecialisationCell.textContent = coach.coachSpecialisation;
         row.appendChild(coachSpecialisationCell);
 
-        table.appendChild(row);
-
-
         const editCell = document.createElement("td");
         const editButton = document.createElement("button");
         editButton.textContent = "Edit";
@@ -112,6 +101,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             row.remove();
             
         });
+
+        table.appendChild(row);
 
     }
 
