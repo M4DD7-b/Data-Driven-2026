@@ -27,19 +27,52 @@
                 <a href="../DataHTML/EmmaData.html">Emma Devlin</a>
             </div>
 
-            <div>
-                <div class="add-main">
-                    <div class="back">
-                        <a id ="back" href="../HTML/reports.html">Back to Reports</a>
-                    </div>
-                    <h2>Faolán's Data</h2>
-                    <p>
-                        Data about random stuff:
-                    </p>
-
-                </div>
-
+            
+            <div class="add-main">
+                <div class="back">
+                    <a id ="back" href="../HTML/reports.html">Back to Reports</a>
+                </div>                    
+                <h2 style="padding-right: 130px;">Faolán's Data</h2>
+                <p>
+                </p>
             </div>
+
+            <div class="main">
+                
+
+                <div style="position: static; left: 1000px; right: 100px; border: 3px solid; text-align: center; float:right; max-width: 200px; ">
+                    <a style="border: 3px;">Report 1 - Current Centre details and Classes/Coaches count</a>
+                    <br>
+                    <a style="padding-bottom: 30px;">Report 2 - Bar Chart showing total members in each centre</a>
+                    <br>
+                    <a style="padding-bottom: 30px;">Report 3 - Average membership length for each member</a>
+                </div>
+                <h2>Reports</h2>
+                <!--<form name="reportChoice" id="faolanReportsForm" style="text-align: right;">
+                    <select name="reports" id="faolanReports" multiple size="3" required="true">
+                        <option value="report1">Placeholder1</option>
+                        <option value="report2">Placeholder2</option>
+                        <option value="report3">Placeholder3</option>
+                    </select>
+                </form>-->
+                
+
+
+                <br>
+
+
+                
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+                    <canvas id="reportOutput" width="400" height="400"></canvas>
+                
+
+                <pre id="report2"></pre>
+                <script src="..\JS\faolanReport1.js"></script>
+                <script src="..\JS\faolanReport2.js"></script>
+            </div>
+
+
+
 
         </div>  
     </body>
