@@ -184,29 +184,39 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     document.getElementById('tableView-report1').addEventListener('click', function() {
+
+        const viewButton = document.getElementById('tableView-report1');
+
         const tableContainer = document.getElementById('table1-container');
         const chartContainer = document.getElementById('chart1-container');
 
         if(tableContainer.style.display === 'block') {
             tableContainer.style.display = 'none';
             chartContainer.style.display = 'block';
+            viewButton.textContent = "View as Table";
         } else {
             tableContainer.style.display = 'block';
             chartContainer.style.display = 'none';
+            viewButton.textContent = "View as Chart";
         }
 
     });
 
     document.getElementById('tableView-report2').addEventListener('click', function() {
+
+        const viewButton = document.getElementById('tableView-report2');
+
         const tableContainer = document.getElementById('table2-container');
         const chartContainer = document.getElementById('chart2-container');
 
         if(tableContainer.style.display === 'block') {
             tableContainer.style.display = 'none';
             chartContainer.style.display = 'block';
+            viewButton.textContent = "View as Table";
         } else {
             tableContainer.style.display = 'block';
             chartContainer.style.display = 'none';
+            viewButton.textContent = "View as Chart";
         }
 
     });
