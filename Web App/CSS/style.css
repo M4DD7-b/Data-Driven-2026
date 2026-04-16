@@ -143,6 +143,17 @@ input {
     width: 200px;
 }
 
+.addEntity {
+    background-color: var(--primary);
+    color: var(--bg-light);
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
 button {
     background-color: var(--primary);
     color: var(--bg-light);

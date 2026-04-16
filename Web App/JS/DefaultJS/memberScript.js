@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", async () => {
         const url = "http://localhost/dbConnector.php";
         const output = document.querySelector("#output");
-        const sql = "SELECT * FROM tblClass;";
+        const sql = "SELECT * FROM tblMember;";
 
         const response = await fetch(url, {
             method: "POST",
@@ -16,12 +16,16 @@ document.addEventListener("DOMContentLoaded", async () => {
         output.textContent = "No data found.";
         return;
     }
-    
+
+        document.querySelector('.addEntity').addEventListener('click', () => {
+        window.location.href = '../AddHTML/addMember.html';
+    });
 
     const table = document.createElement("table");
     const headerRow = document.createElement("tr");
 
-    const headings = ["Centre ID", "Class ID", "Class Name", "Class Category", "Class Date", "Class Start Time", "Class End Time", "Edit", "Delete"];
+    const headings = ["Home Centre ID", "Member ID", "Member Forename", "Member Surname", "Member Email", "Member Phone",
+                "Member DOB", "Membership Type", "Membership Started", "Edit", "Delete"];
 
     for (const heading of headings) {
         const th = document.createElement("th");
@@ -31,36 +35,44 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     table.appendChild(headerRow);
 
-    for (const session of result.data) {
+    for (const member of result.data) {
         const row = document.createElement("tr");
 
-        const centreIdCell = document.createElement("td");
-        centreIdCell.textContent = session.centreId;
-        row.appendChild(centreIdCell);
+        const homeCentreIdCell = document.createElement("td");
+        homeCentreIdCell.textContent = member.homeCentreId;
+        row.appendChild(homeCentreIdCell);
 
-        const classIdCell = document.createElement("td");
-        classIdCell.textContent = session.classId;
-        row.appendChild(classIdCell);
+        const memberIdCell = document.createElement("td");
+        memberIdCell.textContent = member.memberId;
+        row.appendChild(memberIdCell);
 
-        const classNameCell = document.createElement("td");
-        classNameCell.textContent = session.className;
-        row.appendChild(classNameCell);
+        const memberForenameCell = document.createElement("td");
+        memberForenameCell.textContent = member.memberForename;
+        row.appendChild(memberForenameCell);
         
-        const classCategoryCell = document.createElement("td");
-        classCategoryCell.textContent = session.classCategory;
-        row.appendChild(classCategoryCell);
+        const memberSurnameCell = document.createElement("td");
+        memberSurnameCell.textContent = member.memberSurname;
+        row.appendChild(memberSurnameCell);
 
-        const classDateCell = document.createElement("td");
-        classDateCell.textContent = session.classDate;
-        row.appendChild(classDateCell);
+        const memberEmailCell = document.createElement("td");
+        memberEmailCell.textContent = member.memberEmail;
+        row.appendChild(memberEmailCell);
 
-        const classStartTimeCell = document.createElement("td");
-        classStartTimeCell.textContent = session.classStartTime;
-        row.appendChild(classStartTimeCell);
+        const memberPhoneCell = document.createElement("td");
+        memberPhoneCell.textContent = member.memberPhone;
+        row.appendChild(memberPhoneCell);
 
-        const classEndTimeCell = document.createElement("td");
-        classEndTimeCell.textContent = session.classEndTime;
-        row.appendChild(classEndTimeCell);
+        const memberDOBCell = document.createElement("td");
+        memberDOBCell.textContent = member.memberDOB;
+        row.appendChild(memberDOBCell);
+
+        const membershipTypeCell = document.createElement("td");
+        membershipTypeCell.textContent = member.membershipType;
+        row.appendChild(membershipTypeCell);
+
+        const membershipStartDateCell = document.createElement("td");
+        membershipStartDateCell.textContent = member.membershipStartDate;
+        row.appendChild(membershipStartDateCell);
 
         const editCell = document.createElement("td");
         const editButton = document.createElement("button");
@@ -70,7 +82,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         editButton.addEventListener("click", () => {
             window.location.href = `../EditHTML/editCoach.html?coachId=${coach.coachId}`;
         });
-
 
         const deleteCell = document.createElement("td");
         const deleteButton = document.createElement("button");
@@ -115,6 +126,3 @@ document.addEventListener("DOMContentLoaded", async () => {
     output.appendChild(table);
     
 });
-
-
-

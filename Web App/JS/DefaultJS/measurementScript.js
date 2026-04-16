@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", async () => {
         const url = "http://localhost/dbConnector.php";
         const output = document.querySelector("#output");
-        const sql = "SELECT * FROM tblMember;";
+        const sql = "SELECT * FROM tblMeasurement;";
 
         const response = await fetch(url, {
             method: "POST",
@@ -17,11 +17,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
     }
 
+        document.querySelector('.addEntity').addEventListener('click', () => {
+        window.location.href = '../AddHTML/addMeasurement.html';
+    });
+
     const table = document.createElement("table");
     const headerRow = document.createElement("tr");
 
-    const headings = ["Home Centre ID", "Member ID", "Member Forename", "Member Surname", "Member Email", "Member Phone",
-                "Member DOB", "Membership Type", "Membership Started", "Edit", "Delete"];
+    const headings = ["Member ID", "Member Start Weight", "Member Current Weight", "Member Start Muscle Mass", "Member Current Muscle Mass", "Member Condition", "Edit", "Delete"];
 
     for (const heading of headings) {
         const th = document.createElement("th");
@@ -31,45 +34,32 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     table.appendChild(headerRow);
 
-    for (const member of result.data) {
+    for (const measurement of result.data) {
         const row = document.createElement("tr");
 
-        const homeCentreIdCell = document.createElement("td");
-        homeCentreIdCell.textContent = member.homeCentreId;
-        row.appendChild(homeCentreIdCell);
-
         const memberIdCell = document.createElement("td");
-        memberIdCell.textContent = member.memberId;
+        memberIdCell.textContent = measurement.memberId;
         row.appendChild(memberIdCell);
 
-        const memberForenameCell = document.createElement("td");
-        memberForenameCell.textContent = member.memberForename;
-        row.appendChild(memberForenameCell);
+        const memberStartWeightCell = document.createElement("td");
+        memberStartWeightCell.textContent = measurement.memberStartWeight;
+        row.appendChild(memberStartWeightCell);
+
+        const memberCurrentWeightCell = document.createElement("td");
+        memberCurrentWeightCell.textContent = measurement.memberCurrentWeight;
+        row.appendChild(memberCurrentWeightCell);
         
-        const memberSurnameCell = document.createElement("td");
-        memberSurnameCell.textContent = member.memberSurname;
-        row.appendChild(memberSurnameCell);
+        const memberStartMuscleMassCell = document.createElement("td");
+        memberStartMuscleMassCell.textContent = measurement.memberStartMuscleMass;
+        row.appendChild(memberStartMuscleMassCell);
 
-        const memberEmailCell = document.createElement("td");
-        memberEmailCell.textContent = member.memberEmail;
-        row.appendChild(memberEmailCell);
+        const memberCurrentMuscleMassCell = document.createElement("td");
+        memberCurrentMuscleMassCell.textContent = measurement.memberCurrentMuscleMass;
+        row.appendChild(memberCurrentMuscleMassCell);
 
-        const memberPhoneCell = document.createElement("td");
-        memberPhoneCell.textContent = member.memberPhone;
-        row.appendChild(memberPhoneCell);
-
-        const memberDOBCell = document.createElement("td");
-        memberDOBCell.textContent = member.memberDOB;
-        row.appendChild(memberDOBCell);
-
-        const membershipTypeCell = document.createElement("td");
-        membershipTypeCell.textContent = member.membershipType;
-        row.appendChild(membershipTypeCell);
-
-        const membershipStartDateCell = document.createElement("td");
-        membershipStartDateCell.textContent = member.membershipStartDate;
-        row.appendChild(membershipStartDateCell);
-
+        const memberConditionCell = document.createElement("td");
+        memberConditionCell.textContent = measurement.memberCondition;
+        row.appendChild(memberConditionCell);
         const editCell = document.createElement("td");
         const editButton = document.createElement("button");
         editButton.textContent = "Edit";
@@ -78,6 +68,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         editButton.addEventListener("click", () => {
             window.location.href = `../EditHTML/editCoach.html?coachId=${coach.coachId}`;
         });
+
 
         const deleteCell = document.createElement("td");
         const deleteButton = document.createElement("button");
@@ -122,3 +113,5 @@ document.addEventListener("DOMContentLoaded", async () => {
     output.appendChild(table);
     
 });
+
+
