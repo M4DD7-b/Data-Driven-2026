@@ -1,0 +1,216 @@
+
+const url = "http://localhost/dbConnector.php";
+
+async function callSql(sql, onJsonLoad) {
+    // Send the SQL statement in the body of a POST request.
+    const response = await fetch(url, {
+        method: "POST",
+        body: new URLSearchParams({ query: sql })
+    });
+
+
+    await response.json().then(onJsonLoad);
+}
+
+
+async function loadClassPerCoachData() {
+    const sql = `SELECT c.coachId, CONCAT(c.coachForename, ' ', c.coachSurname) as 'coachName', COUNT(cl.classId) AS entryCount FROM tblcoach c LEFT JOIN tblclass cl ON c.coachId = cl.coachId GROUP BY c.coachId;`
+
+    callSql(sql, data => {
+        const ctx = document.getElementById('report1-chart');
+        
+        const ids = data.data.map(row => row.coachId);
+        const names = data.data.map(row => row.coachName);
+        const counts = data.data.map(row => row.entryCount);
+
+        console.log("IDs:", ids);
+        console.log("Names:", names);
+        console.log("Counts:", counts); 
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: names,
+                datasets: [
+                    {
+                        label: '# of classes',
+                        data: counts,
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        // Remove decimal places from y-axis labels
+                        ticks: {
+                            stepSize: 1
+                        }
+                    }
+                }
+            }
+        });
+
+        const tableContainer = document.getElementById('table1-container');
+        tableContainer.innerHTML = ``;
+
+        var table = document.createElement('table');
+        const headerRow = document.createElement("tr");
+
+        const headings = ["Coach ID", "Coach Name", "Number of classes"];
+
+        for (const heading of headings) {
+            const th = document.createElement("th");
+            th.textContent = heading;
+            headerRow.appendChild(th);
+        }
+
+        table.appendChild(headerRow);
+
+        data.data.forEach(element => {
+            const row = document.createElement("tr");
+
+            const coachIdCell = document.createElement("td");
+            coachIdCell.textContent = element.coachId;
+            row.appendChild(coachIdCell);
+
+            const coachNameCell = document.createElement("td");
+            coachNameCell.textContent = element.coachName;
+            row.appendChild(coachNameCell);
+
+            const entryCountCell = document.createElement("td");
+            entryCountCell.textContent = element.entryCount;
+            row.appendChild(entryCountCell);
+
+            table.appendChild(row);
+
+        });
+
+        tableContainer.appendChild(table);
+    
+        
+
+    });
+
+}
+
+async function loadMembershipLengthData() {
+    const sql = `SELECT m.memberId, CONCAT(m.memberForename, ' ', m.memberSurname) as 'memberName', DATEDIFF(CURRENT_DATE, m.membershipStartDate) as 'membershipLength' FROM tblmember m;`;
+    callSql(sql, data => {
+        const ctx = document.getElementById('report2-chart');
+        
+        const ids = data.data.map(row => row.memberId);
+        const names = data.data.map(row => row.memberName);
+        const counts = data.data.map(row => Number(row.membershipLength));
+
+        console.log("IDs:", ids);
+        console.log("Names:", names);
+        console.log("Counts:", counts); 
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: names,
+                datasets: [
+                    {
+                        label: 'Length of membership (days)',
+                        data: counts,
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        // Remove decimal places from y-axis labels
+                    }
+                }
+            }
+        });
+
+        const tableContainer = document.getElementById('table2-container');
+        tableContainer.innerHTML = ``;
+
+        var table = document.createElement('table');
+        const headerRow = document.createElement("tr");
+
+        const headings = ["Member ID", "Member Name", "Membership Length (days)"];
+
+        for (const heading of headings) {
+            const th = document.createElement("th");
+            th.textContent = heading;
+            headerRow.appendChild(th);
+        }
+
+        table.appendChild(headerRow);
+
+        data.data.forEach(element => {
+            const row = document.createElement("tr");
+
+            const memberIdCell = document.createElement("td");
+            memberIdCell.textContent = element.memberId;
+            row.appendChild(memberIdCell);
+
+            const memberNameCell = document.createElement("td");
+            memberNameCell.textContent = element.memberName;
+            row.appendChild(memberNameCell);
+
+            const membershipLengthCell = document.createElement("td");
+            membershipLengthCell.textContent = element.membershipLength;
+            row.appendChild(membershipLengthCell);
+
+            table.appendChild(row);
+
+        });
+
+        tableContainer.appendChild(table);
+    
+
+    });
+
+
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    
+
+
+    console.log("Running!!!");
+
+    loadClassPerCoachData();
+    loadMembershipLengthData();
+
+
+    document.getElementById('tableView-report1').addEventListener('click', function() {
+        const tableContainer = document.getElementById('table1-container');
+        const chartContainer = document.getElementById('chart1-container');
+
+        if(tableContainer.style.display === 'block') {
+            tableContainer.style.display = 'none';
+            chartContainer.style.display = 'block';
+        } else {
+            tableContainer.style.display = 'block';
+            chartContainer.style.display = 'none';
+        }
+
+    });
+
+    document.getElementById('tableView-report2').addEventListener('click', function() {
+        const tableContainer = document.getElementById('table2-container');
+        const chartContainer = document.getElementById('chart2-container');
+
+        if(tableContainer.style.display === 'block') {
+            tableContainer.style.display = 'none';
+            chartContainer.style.display = 'block';
+        } else {
+            tableContainer.style.display = 'block';
+            chartContainer.style.display = 'none';
+        }
+
+    });
+
+
+
+});

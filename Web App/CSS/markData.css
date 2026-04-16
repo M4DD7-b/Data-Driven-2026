@@ -1,0 +1,13 @@
+.report {
+    padding: 50px;
+    border: 5px solid black;
+    margin-bottom: 20px;
+}
+
+.table-container {
+    margin-top: 20px;
+}
+
+.table-container table {
+    margin: auto;;
+}
