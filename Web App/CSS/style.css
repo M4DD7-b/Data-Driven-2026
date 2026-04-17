@@ -106,6 +106,7 @@ ul {
 }
 
 h2 {
+    text-align: center;
     color: var(--primary);
 }
 
