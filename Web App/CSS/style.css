@@ -78,6 +78,14 @@ h2 {
     color: var(--primary);
 }
 
+.dashboard-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 50px;
+    padding: 20px;
+}
+
 .main {
     padding: 10px;
     border-radius: 0px 0px 8px 8px;
