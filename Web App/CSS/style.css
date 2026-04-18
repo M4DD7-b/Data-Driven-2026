@@ -70,24 +70,27 @@ a:hover {
     color: var(--border-muted);
 }
 
-.back {
-    text-align: left;
-}
-
 h2 {
     color: var(--primary);
 }
 
+.internal-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-radius: 8px 8px 0px 0px;
+    background-color: var(--bg);
+}
+
 .dashboard-container {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    gap: 50px;
-    padding: 20px;
+    gap: 20px;
+    padding: 50px;
 }
 
 .main {
-    padding: 10px;
     border-radius: 0px 0px 8px 8px;
     background-color: var(--bg-light);
     color: var(--text);
@@ -116,6 +119,29 @@ ul {
 h2 {
     text-align: center;
     color: var(--primary);
+}
+
+.report-buttons {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+.main-header {
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px 8px 0px 0px;
+    background-color: var(--bg);
+    color: var(--primary);
+}
+
+.report-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 20px;
+    border-radius: 8px 8px 0px 0px;
+    background-color: var(--bg);
 }
 
 .add-main {
