@@ -40,14 +40,27 @@
             <div class="main">
                 
 
-                <div style="position: static; left: 1000px; right: 100px; border: 3px solid; text-align: center; float:right; max-width: 200px; ">
-                    <a style="border: 3px;">Report 1 - Current Centre details and Classes/Coaches count</a>
+                
+                
+                <div id="report3Link" style="position: static; left: 1000px; right: 100px; border: 3px solid; text-align: center; float:right; max-width: 200px;height: 125px ">
+                    <a  style="padding-bottom: 30px; ">Report 3 - Line Chart showing average time spent with Benchmark Fitness of different age groups</a>
                     <br>
-                    <a style="padding-bottom: 30px;">Report 2 - Bar Chart showing total members in each centre</a>
-                    <br>
-                    <a style="padding-bottom: 30px;">Report 3 - Average membership length for each member</a>
                 </div>
-                <h2>Reports</h2>
+                
+                <div id="report2Link" style="position: static; left: 1000px; right: 100px; border: 3px solid; text-align: center; float:right; max-width: 200px; height: 125px ; ">
+                    <a  style="padding-bottom: 30px;">Report 2 - Bar Chart showing total registered members in each Benchmark Fitness centre</a>
+                    <br>
+                </div>
+                <div id="report1Link" style="position: static; left: 1000px; right: 100px; border: 3px solid; text-align: center; float:right; max-width: 200px;height: 125px ">
+                    <a  style="border: 3px;">Report 1 - Details of current centres and amounts of classes / coaches each has</a>
+                    <br>
+                </div>
+
+                    
+                
+                    
+                
+                <h2 style="font-size: 60px;">Reports</h2>
                 <!--<form name="reportChoice" id="faolanReportsForm" style="text-align: right;">
                     <select name="reports" id="faolanReports" multiple size="3" required="true">
                         <option value="report1">Placeholder1</option>
@@ -58,17 +71,22 @@
                 
 
 
+               <div style="padding: 10px;">
                 <br>
+                <br>
+               </div>
+
 
 
                 
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-                    <canvas id="reportOutput" width="400" height="400"></canvas>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+                <pre style="display: block;" id="report1Output"></pre>
+                <canvas style="display: none; width: 200px; height: 200px" id="report2Output"></canvas>
+                <canvas style="display: none;" id="report3Output"></canvas>
                 
 
-                <pre id="report2"></pre>
-                <script src="..\JS\ReportJS\faolanReport1.js"></script>
-                <script src="..\JS\ReportJS\faolanReport2.js"></script>
+                
+                <script src="..\JS\ReportJS\faolanReport.js"></script>
             </div>
 
 

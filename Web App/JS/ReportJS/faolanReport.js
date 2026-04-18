@@ -12,6 +12,7 @@ async function getSQLInfo(sql, event){
 
 }
 
+//table
 async function report1(output){
     const report1Sql = "SELECT Centre.centreName, concat(Centre.street,', ',Centre.city) AS centreLocation, Centre.unitNo, Centre.postcode,Class.totalClassId, CoachCentre.totalCoachId " +
 "FROM fitnessclub.tblcentre AS Centre " +
@@ -32,7 +33,7 @@ async function report1(output){
         }
         table.appendChild(headerRow);
 
-        console.log(event.data);
+        //console.log(event.data);
         for (const centre of event.data) {
             const row = document.createElement("tr");
 
@@ -60,6 +61,8 @@ async function report1(output){
             centreCoachAmountCell.textContent = centre.totalCoachId;
             row.appendChild(centreCoachAmountCell);
 
+            table.style.tableLayout = "fixed";
+            table.style.width = 100%
             table.appendChild(row);        
     }
 
@@ -73,7 +76,8 @@ async function report1(output){
     
 }
 
-async function report2(output){
+//bar chart
+async function report2(){
     const report2Sql = "SELECT tblcentre.centreName AS 'CentreName', COUNT(x.homeCentreId) AS 'TotalMembers' FROM fitnessclub.tblmember x JOIN fitnessclub.tblcentre ON x.homeCentreId =tblcentre.centreID GROUP BY homeCentreId  ORDER BY  COUNT('Total Members') DESC;";
     const sqlData = getSQLInfo(report2Sql, event => {
         var nameArray = [];
@@ -85,7 +89,7 @@ async function report2(output){
 
         const barColors = ["rgb(219, 80, 64)","rgb(191, 219, 64)","rgb(64, 219, 108)","rgb(64, 204, 219)","rgb(118, 64, 219)"];
     
-        var chart = new Chart("reportOutput", {
+        var chart = new Chart("report2Output", {
             type: "bar",
             data: {
                 labels: nameArray,
@@ -97,11 +101,49 @@ async function report2(output){
             },
             options: { scales: {   yAxes: [{ ticks: { beginAtZero: true } }] } }
         });
-
-
     });
+}
 
-    
+//line chart
+async function report3(){ 
+    const report3Sql = "SELECT AVG(DATEDIFF(CURDATE(),member.membershipStartDate)) AS average FROM fitnessclub.tblmember AS member WHERE DATEDIFF(CURDATE(), member.memberDOB) < 7306 UNION ALL " +
+"SELECT AVG(DATEDIFF(CURDATE(),member.membershipStartDate))  FROM fitnessclub.tblmember AS member WHERE DATEDIFF(CURDATE(), member.memberDOB) >= 7306 && DATEDIFF(CURDATE(), member.memberDOB) < 10958 UNION ALL " +
+"SELECT AVG(DATEDIFF(CURDATE(),member.membershipStartDate))  FROM fitnessclub.tblmember AS member WHERE DATEDIFF(CURDATE(), member.memberDOB) >= 10958 && DATEDIFF(CURDATE(), member.memberDOB) < 14610 UNION ALL " +
+"SELECT AVG(DATEDIFF(CURDATE(),member.membershipStartDate))  FROM fitnessclub.tblmember AS member WHERE DATEDIFF(CURDATE(), member.memberDOB) >= 14610 && DATEDIFF(CURDATE(), member.memberDOB) < 18263 UNION ALL " +
+"SELECT AVG(DATEDIFF(CURDATE(),member.membershipStartDate))  FROM fitnessclub.tblmember AS member WHERE DATEDIFF(CURDATE(), member.memberDOB) >= 18263;";
+//average time with service of each age group
+
+const sqlData = getSQLInfo(report3Sql, event => {
+    const lineColourArray = ["rgb(130, 74, 17)","rgb(190, 74, 17)","rgb(230, 74, 17)","rgb(74, 17, 117)","rgb(219, 64, 134)"];
+    var nameArray = ["Under 20", "20 - 30", "30 - 40", "40 - 50", "50+"];
+    var valueArray = [];
+    for(const x of event.data){
+        valueArray.push(x.average);
+    }
+
+    var chart = new Chart("report3Output", {
+        type: 'line',
+        data: {
+            labels: nameArray,
+            datasets: [{
+                label: "Average time spent with Benchmark Fitness of different age groups (days)",
+                data: valueArray,
+                backgroundColor: lineColourArray,
+                borderWidth: 1
+            }]
+        },
+        options:{
+            scales:{
+                y: {
+                    beginAtZero: true,
+                }
+            }
+        }
+    })
+
+
+})
+
 
 }
 
@@ -113,12 +155,46 @@ async function report2(output){
 
 document.addEventListener("DOMContentLoaded", async () => {
 
-    const output1 = document.querySelector("#report1"); 
-    const output2 = document.querySelector("#report2");
-    const output3 = document.querySelector("#report3"); 
+    const output1 = document.querySelector("#report1Output"); 
 
     report1(output1);
-    report2(output2);
+    report2();
+    report3();
+
+
+
+    document.getElementById('report1Link').addEventListener('click', function() {
+
+        const report1 = document.getElementById('report1Output');
+        const report2 = document.getElementById('report2Output');
+        const report3 = document.getElementById('report3Output');
+
+        report1.style.display = 'block';
+        report2.style.display = 'none';
+        report3.style.display = 'none';
+    });
+
+    document.getElementById('report2Link').addEventListener('click', function() {
+
+        const report1 = document.getElementById('report1Output');
+        const report2 = document.getElementById('report2Output');
+        const report3 = document.getElementById('report3Output');
+
+        report1.style.display = 'none';
+        report2.style.display = 'block';
+        report3.style.display = 'none';
+    });
+
+    document.getElementById('report3Link').addEventListener('click', function() {
+
+        const report1 = document.getElementById('report1Output');
+        const report2 = document.getElementById('report2Output');
+        const report3 = document.getElementById('report3Output');
+
+        report1.style.display = 'none';
+        report2.style.display = 'none';
+        report3.style.display = 'block';
+    });
 
     
 });
