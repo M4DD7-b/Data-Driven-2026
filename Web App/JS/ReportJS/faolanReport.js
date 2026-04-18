@@ -15,9 +15,9 @@ async function getSQLInfo(sql, event){
 //table
 async function report1(output){
     const report1Sql = "SELECT Centre.centreName, concat(Centre.street,', ',Centre.city) AS centreLocation, Centre.unitNo, Centre.postcode,Class.totalClassId, CoachCentre.totalCoachId " +
-"FROM fitnessclub.tblcentre AS Centre " +
-"JOIN ( SELECT centreID, Count(tblclass.classId) AS totalClassId FROM fitnessclub.tblclass GROUP BY tblclass.centreId) AS Class ON Class.centreId = Centre.centreId " +
-"JOIN (SELECT centreId, Count(tblcoachcentre.coachId) AS totalCoachId FROM fitnessclub.tblcoachcentre GROUP BY tblcoachcentre.centreId) AS CoachCentre ON CoachCentre.centreId = Centre.centreId"
+"FROM tblcentre AS Centre " +
+"JOIN ( SELECT centreID, Count(tblclass.classId) AS totalClassId FROM tblclass GROUP BY tblclass.centreId) AS Class ON Class.centreId = Centre.centreId " +
+"JOIN (SELECT centreId, Count(tblcoachcentre.coachId) AS totalCoachId FROM tblcoachcentre GROUP BY tblcoachcentre.centreId) AS CoachCentre ON CoachCentre.centreId = Centre.centreId"
 
     var sqlData = getSQLInfo(report1Sql, event => {
 
@@ -78,7 +78,7 @@ async function report1(output){
 
 //bar chart
 async function report2(){
-    const report2Sql = "SELECT tblcentre.centreName AS 'CentreName', COUNT(x.homeCentreId) AS 'TotalMembers' FROM fitnessclub.tblmember x JOIN fitnessclub.tblcentre ON x.homeCentreId =tblcentre.centreID GROUP BY homeCentreId  ORDER BY  COUNT('Total Members') DESC;";
+    const report2Sql = "SELECT tblcentre.centreName AS 'CentreName', COUNT(x.homeCentreId) AS 'TotalMembers' FROM tblmember x JOIN tblcentre ON x.homeCentreId =tblcentre.centreID GROUP BY homeCentreId  ORDER BY  COUNT('Total Members') DESC;";
     const sqlData = getSQLInfo(report2Sql, event => {
         var nameArray = [];
         var valueArray = [];
@@ -106,11 +106,11 @@ async function report2(){
 
 //line chart
 async function report3(){ 
-    const report3Sql = "SELECT AVG(DATEDIFF(CURDATE(),member.membershipStartDate)) AS average FROM fitnessclub.tblmember AS member WHERE DATEDIFF(CURDATE(), member.memberDOB) < 7306 UNION ALL " +
-"SELECT AVG(DATEDIFF(CURDATE(),member.membershipStartDate))  FROM fitnessclub.tblmember AS member WHERE DATEDIFF(CURDATE(), member.memberDOB) >= 7306 && DATEDIFF(CURDATE(), member.memberDOB) < 10958 UNION ALL " +
-"SELECT AVG(DATEDIFF(CURDATE(),member.membershipStartDate))  FROM fitnessclub.tblmember AS member WHERE DATEDIFF(CURDATE(), member.memberDOB) >= 10958 && DATEDIFF(CURDATE(), member.memberDOB) < 14610 UNION ALL " +
-"SELECT AVG(DATEDIFF(CURDATE(),member.membershipStartDate))  FROM fitnessclub.tblmember AS member WHERE DATEDIFF(CURDATE(), member.memberDOB) >= 14610 && DATEDIFF(CURDATE(), member.memberDOB) < 18263 UNION ALL " +
-"SELECT AVG(DATEDIFF(CURDATE(),member.membershipStartDate))  FROM fitnessclub.tblmember AS member WHERE DATEDIFF(CURDATE(), member.memberDOB) >= 18263;";
+    const report3Sql = "SELECT AVG(DATEDIFF(CURDATE(),member.membershipStartDate)) AS average FROM tblmember AS member WHERE DATEDIFF(CURDATE(), member.memberDOB) < 7306 UNION ALL " +
+"SELECT AVG(DATEDIFF(CURDATE(),member.membershipStartDate))  FROM tblmember AS member WHERE DATEDIFF(CURDATE(), member.memberDOB) >= 7306 && DATEDIFF(CURDATE(), member.memberDOB) < 10958 UNION ALL " +
+"SELECT AVG(DATEDIFF(CURDATE(),member.membershipStartDate))  FROM tblmember AS member WHERE DATEDIFF(CURDATE(), member.memberDOB) >= 10958 && DATEDIFF(CURDATE(), member.memberDOB) < 14610 UNION ALL " +
+"SELECT AVG(DATEDIFF(CURDATE(),member.membershipStartDate))  FROM tblmember AS member WHERE DATEDIFF(CURDATE(), member.memberDOB) >= 14610 && DATEDIFF(CURDATE(), member.memberDOB) < 18263 UNION ALL " +
+"SELECT AVG(DATEDIFF(CURDATE(),member.membershipStartDate))  FROM tblmember AS member WHERE DATEDIFF(CURDATE(), member.memberDOB) >= 18263;";
 //average time with service of each age group
 
 const sqlData = getSQLInfo(report3Sql, event => {
