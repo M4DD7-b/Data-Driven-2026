@@ -34,7 +34,35 @@
             </div>
 
             <div class="main">
-                <div id="myChart"></div>
+
+                <div class="maddy-report" style="text-align: center;">
+                    <h2>Class Turnout</h2>
+                    <div class="chart-container" style="width: 25vw; padding: 10px" id="chart1-container">
+                        <canvas id="report1-chart"></canvas>
+                    </div>
+                    <div id="table1-container" class="table-container" style="display: none;"></div>
+                </div>
+
+                <hr></hr>
+
+                <div class="maddy-report" style="text-align: center;">
+                        <h2>Top 10 Muscle Mass Difference</h2>
+                        <div class="chart-container" style="width: 50vw;" id="chart2-container">
+                            <canvas id="report2-chart"></canvas>
+                        </div>
+                        <div id="table2-container" class="table-container" style="display: none;"></div>
+                </div>
+                <div id="lowestTurnoutTable"></div>
+            </div>
+
+            <hr></hr>
+
+            <div class="maddy-report" style="text-align: center;">
+                <h2>Condition-Based Weight Analysis</h2>
+                <div class="chart-container" style="width: 50vw;" id="chart3-container">
+                    <canvas id="report3-chart"></canvas>
+                </div>
+                <div id="table3-container" class="table-container" style="display: none;"></div>
             </div>
         </div> 
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

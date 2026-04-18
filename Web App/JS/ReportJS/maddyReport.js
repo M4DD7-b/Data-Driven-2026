@@ -1,38 +1,197 @@
-document.addEventListener("DOMContentLoaded", async () => {
-        const url = "http://localhost/dbConnector.php";
-        const myChart = document.querySelector("#myChart");
+const url = "http://localhost/dbConnector.php";
 
-        const sql =
-        "SELECT c.className, CONCAT(co.firstName, ' ', co.lastName) AS coachName, COUNT(e.memberId) AS enrolledMembers, ROUND(AVG(a.attendanceRate), 2) AS averageAttendanceRate FROM tblClass c JOIN tblCoach co ON c.coachId = co.coachId LEFT JOIN tblEnrollment e ON c.classId = e.classId LEFT JOIN tblAttendance a ON e.enrollmentId = a.enrollmentId GROUP BY c.classId ORDER BY averageAttendanceRate ASC LIMIT 5;";
+async function callSql(sql, onJsonLoad) {
+    const response = await fetch(url, {
+        method: "POST",
+        body: new URLSearchParams({ query: sql })
+    });
 
-        const response = await fetch(url, {
-            method: "POST",
-            body: new URLSearchParams({
-                query: sql
-            })
+    await response.json().then(onJsonLoad);
+
+}
+
+async function loadLowestTurnoutData() {
+    const sql = "SELECT c.className, COUNT(r.memberId) AS reservedMembers FROM tblClass c LEFT JOIN tblReservation r ON c.classId = r.classId GROUP BY c.className ORDER BY reservedMembers DESC;";
+
+    callSql(sql, data => {
+        const ctx = document.getElementById('report1-chart');
+
+        const classNames = data.data.map(row => row.className);
+        const reservedMembers = data.data.map(row => row.reservedMembers);
+
+        console.log("Class Names:", classNames);
+        console.log("Reserved Members:", reservedMembers);
+
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: classNames,
+                datasets: [
+                    {
+                        label: '# of reserved members',
+                        data: reservedMembers,
+                        borderWidth: 1
+                    }
+                ]
+            }
         });
 
-        const result = await response.json();
+        const tableContainer = document.getElementById('table1-container');
+        tableContainer.innerHTML = ``;
 
-    if (!result || !result.success || result.data.length === 0) {
-        myChart.textContent = "No data found.";
-        return;
-    }
-    
-    const ctx = document.querySelector("#myChart");
-    new Chart(ctx, {
-        type: "bar",
-        data: {
-            labels: result.data.map(row => row.className),
-            datasets: [
-                {
-                    label: "Average Attendance Rate",
-                    data: result.data.map(row => row.averageAttendanceRate),
-                    backgroundColor: "rgba(54, 162, 235, 0.2)",
-                    borderColor: "rgba(54, 162, 235, 1)",
-                    borderWidth: 1
-                }
-            ]
+        var table = document.createElement('table');
+        const headerRow = document.createElement("tr");
+
+        const headers = ["Class Name", "Reserved Members"];
+
+        for (const heading of headers) {
+            const th = document.createElement("th");
+            th.textContent = heading;
+            headerRow.appendChild(th);
         }
+
+        table.appendChild(headerRow);
+
+        data.data.forEach(row => {
+            const dataRow = document.createElement("tr");
+
+            const classNameCell = document.createElement("td");
+            classNameCell.textContent = row.className;
+            dataRow.appendChild(classNameCell);
+
+            const reservedMembersCell = document.createElement("td");
+            reservedMembersCell.textContent = row.reservedMembers;
+            dataRow.appendChild(reservedMembersCell);
+
+            table.appendChild(dataRow);
+        });
+
+        tableContainer.appendChild(table);
     });
+}
+
+async function loadMassDifferenceData() {
+    const sql = "SELECT CONCAT(m.memberForename, ' ', m.memberSurname) AS memberName, MAX(me.memberCurrentMuscleMass) - MIN(me.memberStartMuscleMass) AS massDifference FROM tblMember m JOIN tblMeasurement me ON m.memberId = me.memberId WHERE YEAR(m.membershipStartDate) = YEAR(CURDATE()) GROUP BY m.memberId ORDER BY massDifference ASC LIMIT 10;";
+
+    callSql(sql, data => {
+        const ctx = document.getElementById('report2-chart');
+
+        const memberNames = data.data.map(row => row.memberName);
+        const massDifferences = data.data.map(row => row.massDifference);
+
+        console.log("Member Names:", memberNames);
+        console.log("Mass Differences:", massDifferences);
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: memberNames,
+                datasets: [
+                    {
+                        label: 'Muscle Mass Difference',
+                        data: massDifferences,
+                        borderWidth: 1
+                    }
+                ]
+            }
+        });
+
+        const tableContainer = document.getElementById('table2-container');
+        tableContainer.innerHTML = ``;
+
+        var table = document.createElement('table');
+        const headerRow = document.createElement("tr");
+
+        const headers = ["Member Name", "Mass Difference"];
+
+        for (const heading of headers) {
+            const th = document.createElement("th");
+            th.textContent = heading;
+            headerRow.appendChild(th);
+        }
+
+        table.appendChild(headerRow);
+
+        data.data.forEach(row => {
+            const dataRow = document.createElement("tr");
+
+            const classNameCell = document.createElement("td");
+            classNameCell.textContent = row.className;
+            dataRow.appendChild(classNameCell);
+
+            const reservedMembersCell = document.createElement("td");
+            reservedMembersCell.textContent = row.reservedMembers;
+            dataRow.appendChild(reservedMembersCell);
+
+            table.appendChild(dataRow);
+        });
+
+        tableContainer.appendChild(table);
+    });
+}
+
+async function loadConditionDifferenceData() {
+    const sql = "SELECT CASE WHEN memberCondition IS NOT NULL THEN 'With Condition' ELSE 'Without Condition' END AS conditionStatus, AVG(memberCurrentWeight) AS averageWeight FROM tblMember m JOIN tblMeasurement me ON m.memberId = me.memberId GROUP BY conditionStatus;";
+
+    callSql(sql, data => {
+        const ctx = document.getElementById('report3-chart');
+
+        const conditionStatuses = data.data.map(row => row.conditionStatus);
+        const averageWeights = data.data.map(row => row.averageWeight);
+
+        console.log("Condition Statuses:", conditionStatuses);
+        console.log("Average Weights:", averageWeights);
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: conditionStatuses,
+                datasets: [
+                    {
+                        label: 'Average Weight',
+                        data: averageWeights,
+                        borderWidth: 1
+                    }
+                ]
+            }
+        });
+
+        const tableContainer = document.getElementById('table3-container');
+        tableContainer.innerHTML = ``;
+
+        var table = document.createElement('table');
+        const headerRow = document.createElement("tr");
+
+        const headers = ["Condition Status", "Average Weight"];
+
+        for (const heading of headers) {
+            const th = document.createElement("th");
+            th.textContent = heading;
+            headerRow.appendChild(th);
+        }
+
+        table.appendChild(headerRow);
+
+        data.data.forEach(row => {
+            const dataRow = document.createElement("tr");
+
+            const classNameCell = document.createElement("td");
+            classNameCell.textContent = row.className;
+            dataRow.appendChild(classNameCell);
+
+            const reservedMembersCell = document.createElement("td");
+            reservedMembersCell.textContent = row.reservedMembers;
+            dataRow.appendChild(reservedMembersCell);
+
+            table.appendChild(dataRow);
+        });
+
+        tableContainer.appendChild(table);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    loadLowestTurnoutData();
+    loadMassDifferenceData();
+    loadConditionDifferenceData();
 });
