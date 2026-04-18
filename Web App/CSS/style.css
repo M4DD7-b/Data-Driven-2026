@@ -91,6 +91,15 @@ h2 {
 }
 
 .main {
+    padding: 10px;
+    border-radius: 0px 0px 8px 8px;
+    background-color: var(--bg-light);
+    color: var(--text);
+}
+
+.crud-main {
+    display: block;
+    padding: 10px;
     border-radius: 0px 0px 8px 8px;
     background-color: var(--bg-light);
     color: var(--text);

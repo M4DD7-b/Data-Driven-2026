@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", async () => {
         const url = "http://localhost/dbConnector.php";
-        const output = document.querySelector("#output");
+        const myChart = document.querySelector("#myChart");
 
         const sql =
         "SELECT c.className, CONCAT(co.firstName, ' ', co.lastName) AS coachName, COUNT(e.memberId) AS enrolledMembers, ROUND(AVG(a.attendanceRate), 2) AS averageAttendanceRate FROM tblClass c JOIN tblCoach co ON c.coachId = co.coachId LEFT JOIN tblEnrollment e ON c.classId = e.classId LEFT JOIN tblAttendance a ON e.enrollmentId = a.enrollmentId GROUP BY c.classId ORDER BY averageAttendanceRate ASC LIMIT 5;";
@@ -15,10 +15,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         const result = await response.json();
 
     if (!result || !result.success || result.data.length === 0) {
-        output.textContent = "No data found.";
+        myChart.textContent = "No data found.";
         return;
     }
-
+    
     const ctx = document.querySelector("#myChart");
     new Chart(ctx, {
         type: "bar",
