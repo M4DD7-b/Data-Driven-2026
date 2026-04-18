@@ -44,7 +44,7 @@ body {
     border-radius: 8px 8px 0px 0px;
     padding: 10px 10px 0px 10px;    
     background-color: var(--bg);
-    color: var(--text);
+    color: #E0D5F3;
 }
 
 h1 {
@@ -55,9 +55,13 @@ h1 {
 
 .nav {
     text-align: center;
-    padding: 10px;
-    background-color: var(--bg);
+    padding: 8px;
+    background-color: #E0D5F3;
     color: var(--primary);
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid var(--border-muted);
+    font-weight: bold;
 }
 
 a {
@@ -106,13 +110,16 @@ h2 {
 }
 
 table {
-    margin: 10px 0px;
+    margin: 20px auto;
     border-collapse: collapse;
+    width: 95%; 
+    table-layout: auto; 
 }
 
 td, th {
     border: solid 1px var(--text);
     padding: 10px;
+    font-size: 16px;
 }
 
 #output {
