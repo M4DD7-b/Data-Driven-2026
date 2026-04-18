@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Benchmark Sports</title>
         <link rel="stylesheet" href="../CSS/style.css">
+        <link rel="stylesheet" href="../CSS/emmaData.css">
     </head>
     <body>
         <div class="page">
@@ -37,6 +38,51 @@
 
             </div>
 
+            <div>
+                <!-- DROPDOWN -->
+                <div style="position: static; left: 1000px; right: 100px; text-align: center; float:right; max-width: 200px; ">
+                    <select class="dropdown" id="report_dropdown">
+                        <option value="report1">Report 1</option>
+                        <option value="report2">Report 2</option>
+                        <option value="report3">Report 3</option>
+                    <select>
+                </div>
+
+                <div class="main">
+                    <!-- First report - Listing members with medical conditions [TABLE] -->
+                    <div id="report1" class="view">
+                        <div class="report" style="text-align: center;">
+                            <h2>List of members with medical conditions:</h2>
+                            <div id="table1-container" class="table-container;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Second report - Listing members over forty [TABLE] -->
+                    <div id="report2" class="hide">
+                        <div class="report" style="text-align: center;">
+                            <h2>List of members over forty:</h2>
+                            <div id="table2-container" class="table-container"></div>
+                        </div>
+                    </div>
+
+                    <!-- Third report - Number of specialisations of coach per centre [TABLE + CHART] -->
+                    <div id="report3" class="hide">
+                        <div class="report" style="text-align: center;">
+                            <h2>Number of different coach specialisations per centre:</h2>
+                            <div id="table3-container" class="table-container"></div>
+                            <div id="report3-container" class="report-container" style="width: 50vw; margin: auto;">
+                                <canvas id="chart-container"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+
+            </div>
+
         </div>  
+
+        <script src="..\JS\ReportJS\emmaReports.js"></script> <!-- Linking to JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>  <!-- Linking to CDN -->
     </body>
 </html> 
