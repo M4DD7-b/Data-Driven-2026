@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         editCell.appendChild(editButton);
         row.appendChild(editCell);
         editButton.addEventListener("click", () => {
-            window.location.href = `../EditHTML/editCoach.html?coachId=${coach.coachId}`;
+            window.location.href = `../EditHTML/editReservation.html?classId=${reservation.classId}`;
         });
 
         const deleteCell = document.createElement("td");
@@ -60,10 +60,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         deleteCell.appendChild(deleteButton);
         row.appendChild(deleteCell);
         deleteButton.addEventListener("click", async () => {
-            if (!confirm("Are you sure you want to delete this coach?")) {
+            if (!confirm("Are you sure you want to delete this reservation?")) {
                 return;
             }   
-            const deleteSql = `DELETE FROM tblCoach WHERE coachId = ${coach.coachId} LIMIT 1;`;
+            const deleteSql = `DELETE FROM tblReservation WHERE classId = ${reservation.classId} && memberId = ${reservation.memberId} LIMIT 1;`;
 
             
             const response = await fetch(url, {
@@ -76,16 +76,16 @@ document.addEventListener("DOMContentLoaded", async () => {
             const result = await response.json();
             
             if (!result || !result.success) {
-                console.log("Failed to delete coach.");
+                console.log("Failed to delete reservation.");
                 return;
             }   
             if (result.affected_rows === 0) {
-                console.log("No coach was deleted. It may have already been removed.");
+                console.log("No reservation was deleted. It may have already been removed.");
                 return;
             }
             console.log(`result : ${JSON.stringify(result)}`);
             console.log(result.affected_rows);
-            console.log("Coach deleted successfully!");
+            console.log("Reservation deleted successfully!");
             row.remove();
             
         });

@@ -20,21 +20,20 @@
 
             </div>
 
-            <form id="classForm" class="createForm">
+            <div class="center-form">
+                <form id="classForm" class="createForm">
+                    <div class="form-row">
+                        <label for="classId">Class ID</label>
+                        <input type="number" id="classId" required>
+                    </div>
 
-                <div class="form-row">
-                    <label for="classId">Class ID</label>
-                    <input type="number" id="classId" required>
-                </div>
-
-                <div class="form-row">
-                    <label for="memberId">Member ID</label>
-                    <input type="number" id="memberId" required>
-                </div>
-                </div>
-
-                <button type="submit">Update Reservation Data</button>
-            </form>
+                    <div class="form-row">
+                        <label for="memberId">Member ID</label>
+                        <input type="number" id="memberId" required>
+                    </div>
+                    <button type="submit">Update Reservation Data</button>
+                </form>
+            </div>
 
             <!-- This empty box is filled with success or error messages by JavaScript. -->
             <div id="output" class="message"></div>
