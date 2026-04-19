@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", async () => {
         const url = "http://localhost/dbConnector.php";
         const output = document.querySelector("#output");
-        const sql = "SELECT * FROM tblClass;";
+        const sql = "SELECT ce.centreName, c.classCategory, c.classDate, c.classStartTime, c.classEndTime FROM tblClass c JOIN tblCentre ce ON c.centreId = ce.centreId;";
 
         const response = await fetch(url, {
             method: "POST",
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const table = document.createElement("table");
     const headerRow = document.createElement("tr");
 
-    const headings = ["Centre ID", "Class ID", "Class Name", "Class Category", "Class Date", "Class Start Time", "Class End Time", "Edit", "Delete"];
+    const headings = ["Centre Name", "Class Category", "Class Date", "Class Start Time", "Class End Time", "Edit", "Delete"];
 
     for (const heading of headings) {
         const th = document.createElement("th");
@@ -38,17 +38,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     for (const session of result.data) {
         const row = document.createElement("tr");
 
-        const centreIdCell = document.createElement("td");
-        centreIdCell.textContent = session.centreId;
-        row.appendChild(centreIdCell);
-
-        const classIdCell = document.createElement("td");
-        classIdCell.textContent = session.classId;
-        row.appendChild(classIdCell);
-
-        const classNameCell = document.createElement("td");
-        classNameCell.textContent = session.className;
-        row.appendChild(classNameCell);
+        const centreNameCell = document.createElement("td");
+        centreNameCell.textContent = session.centreName;
+        row.appendChild(centreNameCell);
         
         const classCategoryCell = document.createElement("td");
         classCategoryCell.textContent = session.classCategory;
@@ -72,7 +64,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         editCell.appendChild(editButton);
         row.appendChild(editCell);
         editButton.addEventListener("click", () => {
-            window.location.href = `../EditHTML/editCoach.html?coachId=${coach.coachId}`;
+            window.location.href = `../EditHTML/editClass.html?classId=${session.classId}`;
         });
 
 
@@ -82,10 +74,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         deleteCell.appendChild(deleteButton);
         row.appendChild(deleteCell);
         deleteButton.addEventListener("click", async () => {
-            if (!confirm("Are you sure you want to delete this coach?")) {
+            if (!confirm("Are you sure you want to delete this class?")) {
                 return;
             }   
-            const deleteSql = `DELETE FROM tblCoach WHERE coachId = ${coach.coachId} LIMIT 1;`;
+            const deleteSql = `DELETE FROM tblClass WHERE classId = ${session.classId} LIMIT 1;`;
 
             
             const response = await fetch(url, {
@@ -98,16 +90,16 @@ document.addEventListener("DOMContentLoaded", async () => {
             const result = await response.json();
             
             if (!result || !result.success) {
-                console.log("Failed to delete coach.");
+                console.log("Failed to delete class.");
                 return;
             }   
             if (result.affected_rows === 0) {
-                console.log("No coach was deleted. It may have already been removed.");
+                console.log("No class was deleted. It may have already been removed.");
                 return;
             }
             console.log(`result : ${JSON.stringify(result)}`);
             console.log(result.affected_rows);
-            console.log("Coach deleted successfully!");
+            console.log("Class deleted successfully!");
             row.remove();
             
         });

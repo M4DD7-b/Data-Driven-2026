@@ -20,31 +20,32 @@
 
             </div>
 
-            <form id="classForm" class="createForm">
+            <div class="center-form">
+                <form id="classForm" class="createForm">
+                    <div class="form-row">
+                        <label for="memberStartWeight">Member Start Weight</label>
+                        <input type="number" id="memberStartWeight" required>
+                    </div>
 
-                <div class="form-row">
-                    <label for="memberStartWeight">Member Start Weight</label>
-                    <input type="number" id="memberStartWeight" required>
-                </div>
+                    <div class="form-row">
+                        <label for="memberCurrentWeight">Member Current Weight</label>
+                        <input type="number" id="memberCurrentWeight" required>
+                    </div>
 
-                <div class="form-row">
-                    <label for="memberCurrentWeight">Member Current Weight</label>
-                    <input type="number" id="memberCurrentWeight" required>
-                </div>
+                    <div class="form-row">
+                        <label for="memberStartMuscleMass">Member Start Muscle Mass</label>
+                        <input type="number" id="memberStartMuscleMass" required>
+                    </div>
 
-                <div class="form-row">
-                    <label for="memberStartMuscleMass">Member Start Muscle Mass</label>
-                    <input type="number" id="memberStartMuscleMass" required>
-                </div>
+                    <div class="form-row">
+                        <label for="memberCondition">Member Condition</label>
+                        <input type="text" id="memberCondition" required>
+                    </div>
 
-                <div class="form-row">
-                    <label for="memberCondition">Member Condition</label>
-                    <input type="text" id="memberCondition" required>
-                </div>
-                </div>
+                    <button type="submit">Update Measurement Data</button>
+                </form>
 
-                <button type="submit">Update Measurement Data</button>
-            </form>
+            </div>
 
             <!-- This empty box is filled with success or error messages by JavaScript. -->
             <div id="output" class="message"></div>

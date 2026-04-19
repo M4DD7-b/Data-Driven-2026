@@ -11,21 +11,21 @@ async function callSql(sql, onJsonLoad) {
 }
 
 async function loadLowestTurnoutData() {
-    const sql = "SELECT c.className, COUNT(r.memberId) AS reservedMembers FROM tblClass c LEFT JOIN tblReservation r ON c.classId = r.classId GROUP BY c.className ORDER BY reservedMembers DESC;";
+    const sql = "SELECT c.classCategory, COUNT(r.memberId) AS reservedMembers FROM tblClass c LEFT JOIN tblReservation r ON c.classId = r.classId GROUP BY c.classCategory ORDER BY reservedMembers DESC;";
 
     callSql(sql, data => {
         const ctx = document.getElementById('report1-chart');
 
-        const classNames = data.data.map(row => row.className);
+        const classCategories = data.data.map(row => row.classCategory);
         const reservedMembers = data.data.map(row => row.reservedMembers);
 
-        console.log("Class Names:", classNames);
+        console.log("Class Categories:", classCategories);
         console.log("Reserved Members:", reservedMembers);
 
         new Chart(ctx, {
             type: 'pie',
             data: {
-                labels: classNames,
+                labels: classCategories,
                 datasets: [
                     {
                         label: '# of reserved members',
@@ -42,7 +42,7 @@ async function loadLowestTurnoutData() {
         var table = document.createElement('table');
         const headerRow = document.createElement("tr");
 
-        const headers = ["Class Name", "Reserved Members"];
+        const headers = ["Class Category", "Reserved Members"];
 
         for (const heading of headers) {
             const th = document.createElement("th");
@@ -55,9 +55,9 @@ async function loadLowestTurnoutData() {
         data.data.forEach(row => {
             const dataRow = document.createElement("tr");
 
-            const classNameCell = document.createElement("td");
-            classNameCell.textContent = row.className;
-            dataRow.appendChild(classNameCell);
+            const classCategoryCell = document.createElement("td");
+            classCategoryCell.textContent = row.classCategories;
+            dataRow.appendChild(classCategoryCell);
 
             const reservedMembersCell = document.createElement("td");
             reservedMembersCell.textContent = row.reservedMembers;

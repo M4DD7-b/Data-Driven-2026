@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Benchmark Sports</title>
+        <link rel="stylesheet" href="../CSS/style.css">
+    </head>
+    <body>
+        <div class="page">
+
+            <div class="add-main">
+                <div class="back">
+                    <a id ="back" href="../HTML/coachCentre.html">Back to Assignment Menu</a>
+                </div>
+                <h2>Edit Assignment</h2>
+                <p>
+                    Update the assignment's details below:
+                </p>
+
+            </div>
+
+            <div class="center-form">
+                <form id="assignmentForm" class="createForm">
+
+                    <div class="form-row">
+                        <label for="coachId">Coach ID</label>
+                        <input type="text" id="coachId" required>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="centreId">Centre ID</label>
+                        <input type="text" id="centreId" required>
+                    </div>
+
+                    <button type="submit">Update Assignment Data</button>
+                </form>
+
+            </div>
+
+            <!-- This empty box is filled with success or error messages by JavaScript. -->
+            <div id="output" class="message"></div>
+            
+        </div>
+
+        <script src="../JS/EditJS/editCoachCentreScript.js"></script>
+    </body>
+</html> 

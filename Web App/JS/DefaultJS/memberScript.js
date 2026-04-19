@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", async () => {
         const url = "http://localhost/dbConnector.php";
         const output = document.querySelector("#output");
-        const sql = "SELECT * FROM tblMember;";
+        const sql = "SELECT CONCAT(m.memberForename, ' ', m.memberSurname) AS memberName, c.centreName AS homeCentre, m.memberEmail, m.memberPhone, m.memberDOB, m.membershipType, m.membershipStartDate FROM tblMember m JOIN tblCentre c ON c.centreId = m.homeCentreId;";
 
         const response = await fetch(url, {
             method: "POST",
@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const table = document.createElement("table");
     const headerRow = document.createElement("tr");
 
-    const headings = ["Home Centre ID", "Member ID", "Member Forename", "Member Surname", "Member Email", "Member Phone",
+    const headings = ["Member Name", "Home Centre", "Member Email", "Member Phone",
                 "Member DOB", "Membership Type", "Membership Started", "Edit", "Delete"];
 
     for (const heading of headings) {
@@ -38,21 +38,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     for (const member of result.data) {
         const row = document.createElement("tr");
 
-        const homeCentreIdCell = document.createElement("td");
-        homeCentreIdCell.textContent = member.homeCentreId;
-        row.appendChild(homeCentreIdCell);
-
-        const memberIdCell = document.createElement("td");
-        memberIdCell.textContent = member.memberId;
-        row.appendChild(memberIdCell);
-
-        const memberForenameCell = document.createElement("td");
-        memberForenameCell.textContent = member.memberForename;
-        row.appendChild(memberForenameCell);
+        const memberNameCell = document.createElement("td");
+        memberNameCell.textContent = member.memberName;
+        row.appendChild(memberNameCell);
         
-        const memberSurnameCell = document.createElement("td");
-        memberSurnameCell.textContent = member.memberSurname;
-        row.appendChild(memberSurnameCell);
+        const homeCentreCell = document.createElement("td");
+        homeCentreCell.textContent = member.homeCentre;
+        row.appendChild(homeCentreCell);
 
         const memberEmailCell = document.createElement("td");
         memberEmailCell.textContent = member.memberEmail;

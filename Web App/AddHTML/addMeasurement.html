@@ -20,40 +20,40 @@
 
             </div>
 
-            <form id="measurementForm" class="createForm">
+            <div class="center-form">
+                <form id="measurementForm" class="createForm">
+                    <div class="form-row">
+                        <label for="memberId">Member ID<sup>*</sup></label>
+                        <input type="number" id="memberId" required>
+                    </div>
 
-                <div class="form-row">
-                    <label for="memberId">Member ID<sup>*</sup></label>
-                    <input type="number" id="memberId" required>
-                </div>
+                    <div class="form-row">
+                        <label for="memberStartWeight">Member Start Weight<sup>*</sup></label>
+                        <input type="number" step="0.01" id="memberStartWeight" required>
+                    </div>
 
-                <div class="form-row">
-                    <label for="memberStartWeight">Member Start Weight<sup>*</sup></label>
-                    <input type="number" step="0.01" id="memberStartWeight" required>
-                </div>
+                    <div class="form-row">
+                        <label for="memberCurrentWeight">Member Current Weight<sup>*</sup></label>
+                        <input type="number" step="0.01" id="memberCurrentWeight" required>
+                    </div>
 
-                <div class="form-row">
-                    <label for="memberCurrentWeight">Member Current Weight<sup>*</sup></label>
-                    <input type="number" step="0.01" id="memberCurrentWeight" required>
-                </div>
+                    <div class="form-row">
+                        <label for="memberStartMuscleMass">Member Start Muscle Mass<sup>*</sup></label>
+                        <input type="number" step="0.01" id="memberStartMuscleMass" required>
+                    </div>
 
-                <div class="form-row">
-                    <label for="memberStartMuscleMass">Member Start Muscle Mass<sup>*</sup></label>
-                    <input type="number" step="0.01" id="memberStartMuscleMass" required>
-                </div>
+                    <div class="form-row">
+                        <label for="memberCurrentMuscleMass">Member Current Muscle Mass<sup>*</sup></label>
+                        <input type="number" step="0.01" id="memberCurrentMuscleMass" required>
+                    </div>
 
-                <div class="form-row">
-                    <label for="memberCurrentMuscleMass">Member Current Muscle Mass<sup>*</sup></label>
-                    <input type="number" step="0.01" id="memberCurrentMuscleMass" required>
-                </div>
-
-                <div class="form-row">
-                    <label for="memberCondition">Member Condition</label>
-                    <input type="text" id="memberCondition">
-                </div>
-
-                <button type="submit">Add Measurement</button>
-            </form>
+                    <div class="form-row">
+                        <label for="memberCondition">Member Condition</label>
+                        <input type="text" id="memberCondition">
+                    </div>
+                    <button type="submit">Add Measurement</button>
+                </form>
+            </div>
 
             <!-- This empty box is filled with success or error messages by JavaScript. -->
             <div id="output" class="message"></div>

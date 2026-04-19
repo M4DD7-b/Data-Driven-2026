@@ -30,6 +30,7 @@ body {
 
     background-color: var(--bg-dark);
     font-family: "Montserrat";
+    font-size: 18px;
 }
 
 .page {
@@ -42,9 +43,14 @@ body {
 .banner {
     text-align: center;
     border-radius: 8px 8px 0px 0px;
-    padding: 10px 10px 0px 10px;    
+    padding: 10px 10px 10px 10px;    
     background-color: var(--bg);
-    color: #E0D5F3;
+    color: var(--primary);
+}
+
+.banner p {
+    width: 600px;
+    display: inline-block;
 }
 
 h1 {
@@ -55,7 +61,7 @@ h1 {
 
 .nav {
     text-align: center;
-    padding: 8px;
+    padding: 10px;
     background-color: #E0D5F3;
     color: var(--primary);
     display: flex;
@@ -83,6 +89,7 @@ h2 {
     align-items: center;
     justify-content: space-between;
     padding: 10px;
+    gap: 10px;
     border-radius: 8px 8px 0px 0px;
     background-color: var(--bg);
 }
@@ -91,7 +98,7 @@ h2 {
     display: flex;
     justify-content: center;
     gap: 20px;
-    padding: 50px;
+    padding: 25px;
 }
 
 .main {
@@ -120,6 +127,10 @@ td, th {
     border: solid 1px var(--text);
     padding: 10px;
     font-size: 16px;
+}
+
+th {
+    background-color: #E0D5F3;
 }
 
 #output {
@@ -178,21 +189,30 @@ h2 {
     color: var(--text);
 }
 
-.createForm {
+.center-form {
     padding: 25px;
-    border-radius: 0px 0px 8px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.createForm {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    width: 100%;
+    text-align: right;
+    border-radius: 0 0 8px 8px;
 }
 
 .form-row {
     display: flex;
-    align-items: center;
-    gap: 10px;
+    gap: 20px;
     margin-bottom: 25px;
 }
 
 .form-row > label {
     width: 260px;
-    text-align: right;
 }
 
 input {
