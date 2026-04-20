@@ -1,7 +1,8 @@
 document.addEventListener("DOMContentLoaded", async () => {
         const url = "http://localhost/dbConnector.php";
         const output = document.querySelector("#output");
-        const sql = "SELECT CONCAT(me.memberForename, ' ', me.memberSurname) AS memberName, m.memberStartWeight, m.memberCurrentWeight, m.memberStartMuscleMass, m.memberCurrentMuscleMass, m.memberCondition FROM tblMeasurement m JOIN tblMember me ON m.memberId = me.memberId;";
+        const errorOutput = document.querySelector("#error-output");
+        const sql = "SELECT m.memberId, CONCAT(me.memberForename, ' ', me.memberSurname) AS memberName, m.memberStartWeight, m.memberCurrentWeight, m.memberStartMuscleMass, m.memberCurrentMuscleMass, m.memberCondition FROM tblMeasurement m JOIN tblMember me ON m.memberId = me.memberId;";
 
         const response = await fetch(url, {
             method: "POST",
@@ -75,6 +76,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         deleteCell.appendChild(deleteButton);
         row.appendChild(deleteCell);
         deleteButton.addEventListener("click", async () => {
+            errorOutput.textContent = "";
             if (!confirm("Are you sure you want to delete this measurement?")) {
                 return;
             }   
@@ -92,10 +94,12 @@ document.addEventListener("DOMContentLoaded", async () => {
             
             if (!result || !result.success) {
                 console.log("Failed to delete measurement.");
+                errorOutput.textContent = (result.error || "Failed to delete measurement. Please try again.");
                 return;
             }   
             if (result.affected_rows === 0) {
                 console.log("No measurement was deleted. It may have already been removed.");
+                errorOutput.textContent = "Failed to delete measurement. It may have already been removed.";
                 return;
             }
             console.log(`result : ${JSON.stringify(result)}`);
