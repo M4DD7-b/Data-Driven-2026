@@ -99,7 +99,13 @@ async function report2(){
                     data: valueArray,
                 }]
             },
-            options: { scales: {   yAxes: [{ ticks: { beginAtZero: true } }] } }
+            options: { 
+                scales: {   
+                    yAxes: [{ 
+                        ticks: { beginAtZero: true } 
+                    }],
+                } 
+            }
         });
     });
 }
