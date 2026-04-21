@@ -19,6 +19,7 @@ async function report1(output){
 "JOIN ( SELECT centreID, Count(tblclass.classId) AS totalClassId FROM tblclass GROUP BY tblclass.centreId) AS Class ON Class.centreId = Centre.centreId " +
 "JOIN (SELECT centreId, Count(tblcoachcentre.coachId) AS totalCoachId FROM tblcoachcentre GROUP BY tblcoachcentre.centreId) AS CoachCentre ON CoachCentre.centreId = Centre.centreId"
 
+
     var sqlData = getSQLInfo(report1Sql, event => {
 
         const table = document.createElement("table");
@@ -29,6 +30,7 @@ async function report1(output){
         for (const heading of headings) {
             const th = document.createElement("th");
             th.textContent = heading;
+            th.style.overflowWrap="anywhere";
             headerRow.appendChild(th);
         }
         table.appendChild(headerRow);
@@ -61,11 +63,14 @@ async function report1(output){
             centreCoachAmountCell.textContent = centre.totalCoachId;
             row.appendChild(centreCoachAmountCell);
 
-            table.style.tableLayout = "fixed";
-            table.style.width = 100%
+            table.style.tableLayout = "auto";
             table.appendChild(row);        
     }
 
+    //table.setAttribute("table-layout","fixed")
+    //table.setAttribute("width","100%");
+  
+    
     output.appendChild(table);
 
     });
@@ -79,6 +84,7 @@ async function report1(output){
 //bar chart
 async function report2(){
     const report2Sql = "SELECT tblcentre.centreName AS 'CentreName', COUNT(x.homeCentreId) AS 'TotalMembers' FROM tblmember x JOIN tblcentre ON x.homeCentreId =tblcentre.centreID GROUP BY homeCentreId  ORDER BY  COUNT('Total Members') DESC;";
+    
     const sqlData = getSQLInfo(report2Sql, event => {
         var nameArray = [];
         var valueArray = [];
@@ -87,7 +93,20 @@ async function report2(){
             valueArray.push(x.TotalMembers);
         }
 
-        const barColors = ["rgb(219, 80, 64)","rgb(191, 219, 64)","rgb(64, 219, 108)","rgb(64, 204, 219)","rgb(118, 64, 219)"];
+        const barColors = [
+            "rgb(219, 80, 64)",
+            "rgb(191, 219, 64)",
+            "rgb(64, 219, 108)",
+            "rgb(64, 204, 219)",
+            "rgb(118, 64, 219)",
+            "rgb(116, 134, 39)",
+            "rgb(33, 117, 57)",
+            "rgb(31, 98, 105)",
+            "rgb(48, 25, 90)",
+            "rgb(14, 5, 88)",
+            "rgb(59, 22, 18)",
+            "rgb(0, 0, 0)",
+        ];
     
         var chart = new Chart("report2Output", {
             type: "bar",
@@ -118,6 +137,7 @@ async function report3(){
 "SELECT AVG(DATEDIFF(CURDATE(),member.membershipStartDate))  FROM tblmember AS member WHERE DATEDIFF(CURDATE(), member.memberDOB) >= 14610 && DATEDIFF(CURDATE(), member.memberDOB) < 18263 UNION ALL " +
 "SELECT AVG(DATEDIFF(CURDATE(),member.membershipStartDate))  FROM tblmember AS member WHERE DATEDIFF(CURDATE(), member.memberDOB) >= 18263;";
 //average time with service of each age group
+
 
 const sqlData = getSQLInfo(report3Sql, event => {
     const lineColourArray = ["rgb(130, 74, 17)","rgb(190, 74, 17)","rgb(230, 74, 17)","rgb(74, 17, 117)","rgb(219, 64, 134)"];
@@ -167,9 +187,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     report2();
     report3();
 
+    document.getElementById("report_title").textContent = "Details of current centres and amounts of classes / coaches each has"
 
 
     document.getElementById('report1Link').addEventListener('click', function() {
+
+        document.getElementById("report_title").textContent = "Details of current centres and amounts of classes / coaches each has"
 
         const report1 = document.getElementById('report1Output');
         const report2 = document.getElementById('report2Output');
@@ -182,6 +205,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     document.getElementById('report2Link').addEventListener('click', function() {
 
+        document.getElementById("report_title").textContent = "Bar Chart showing total registered members in each Benchmark Fitness centre";
+
         const report1 = document.getElementById('report1Output');
         const report2 = document.getElementById('report2Output');
         const report3 = document.getElementById('report3Output');
@@ -192,6 +217,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     document.getElementById('report3Link').addEventListener('click', function() {
+
+        document.getElementById("report_title").textContent = "Line Chart showing average time spent with Benchmark Fitness of different age groups";
+
 
         const report1 = document.getElementById('report1Output');
         const report2 = document.getElementById('report2Output');

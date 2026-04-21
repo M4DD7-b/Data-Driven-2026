@@ -260,7 +260,7 @@ INSERT INTO tblClass (classId, centreId, coachId, className, classCategory, clas
     (7, 3, 1,	'Boxing Conditioning', 	'Boxing', 	'2023-03-07', '16:00:00', '17:00:00'),
     (8, 4, 6,	'Hyrox Endurance', 		'Hyrox', 	'2023-03-08', '12:00:00', '13:30:00'),
     (9, 5, 2,	'Weekend SGPT', 		'SGPT', 	'2023-03-09', '08:00:00', '09:00:00'),
-    (10, 1, 3, 	'Boxing Sparring', 		'Box ing', 	'2023-03-10', '17:30:00', '18:30:00');
+    (10, 1, 3, 	'Boxing Sparring', 		'Boxing', 	'2023-03-10', '17:30:00', '18:30:00');
 
 INSERT INTO tblCoachCentre (coachId, centreId) VALUES
     (1,1),
