@@ -69,13 +69,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         
         deleteCell.appendChild(deleteButton);
         row.appendChild(deleteCell);
-<<<<<<< HEAD
 
         deleteButton.addEventListener("click", async () => {
-=======
-        deleteButton.addEventListener("click", async (event) => {
-            errorOutput.textContent = "";
->>>>>>> af2b18dbd4ef94a1b1f544c884398f802133627b
             if (!confirm("Are you sure you want to delete this coach?")) {
                 return;
             }   

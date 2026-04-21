@@ -3,16 +3,18 @@
 */
 
 -- 1. Query to retrieve the classes with the lowest turnout:
-/* This query includes the class name, the coach running the class,
-* and the number of enrolled members.
+/* This query includes the class category and the number of members reserved.
 */
 SELECT
   c.className,
-  SUM(COALESCE(r.memberId IS NOT NULL,0)) AS reservedMembers -- or COUNT(r.memberId)
+  SUM(COALESCE(r.memberId IS NOT NULL,0)) AS reservedMembers
 FROM tblClass c
 LEFT JOIN tblReservation r ON c.classId = r.classId
 GROUP BY c.className
 ORDER BY reservedMembers DESC;
+
+-- These charts visualise our business questions and grant us valuable insights.
+-- Monitors the wellbeing of our members, allowing stakeholders to make critical decisions.
 
 -- 2. Query to calculate the greatest mass difference of members during this year:
 SELECT

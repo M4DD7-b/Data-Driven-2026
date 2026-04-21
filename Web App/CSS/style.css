@@ -186,6 +186,46 @@ h2 {
     padding: 0px 10px 10px 10px;
 }
 
+.hidden {
+    display: none;
+}
+
+#modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+}
+
+.background {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.content {
+    position: relative;
+    max-width: 600px;
+    margin: 6% auto;
+    background: #fff;
+    padding: 16px;
+    border-radius: 6px;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+}
+
+#close {
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+}
+
+#list {
+    margin: 0;
+    padding-left: 16px;
+    max-height: 50vh;
+    overflow: auto;
+}
+
 .add-main {
     display: flex;
     align-items: center;
@@ -256,4 +296,3 @@ button:hover {
     background-color: var(--bg);
     color: var(--primary);
 }
-

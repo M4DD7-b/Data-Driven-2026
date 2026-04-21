@@ -7,7 +7,6 @@ async function callSql(sql, onJsonLoad) {
     });
 
     await response.json().then(onJsonLoad);
-
 }
 
 async function loadLowestTurnoutData() {
@@ -22,7 +21,7 @@ async function loadLowestTurnoutData() {
         console.log("Class Categories:", classCategories);
         console.log("Reserved Members:", reservedMembers);
 
-        new Chart(ctx, {
+        const pieChart = new Chart(ctx, {
             type: 'pie',
             data: {
                 labels: classCategories,
@@ -33,7 +32,7 @@ async function loadLowestTurnoutData() {
                         borderWidth: 1
                     }
                 ]
-            }
+            },
         });
 
         const tableContainer = document.getElementById('table1-container');

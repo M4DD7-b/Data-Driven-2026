@@ -35,16 +35,26 @@
 
                 <div class="maddy-report" style="text-align: center;">
                     <h2>Class Turnout</h2>
+                    <p>Click on a section to view reservation details:</p>
+                    
                     <div class="chart-container" style="width: 25vw; padding: 10px" id="chart1-container">
                         <canvas id="report1-chart"></canvas>
                     </div>
                     <div id="table1-container" class="table-container" style="display: none;"></div>
+                    <div id="modal" class="hidden">
+                        <div class="background"></div>
+                        <div class="content">
+                            <button id="close">X</button>
+                            <h2 id="title">Members & Classes</h2>
+                            <div id="modal-container"></div>
+                        </div>
+                    </div>
                 </div>
 
                 <hr></hr>
 
                 <div class="maddy-report" style="text-align: center;">
-                        <h2>Top 10 Muscle Mass Difference</h2>
+                        <h2>Top Muscle Mass Difference</h2>
                         <div class="chart-container" style="width: 50vw;" id="chart2-container">
                             <canvas id="report2-chart"></canvas>
                         </div>
