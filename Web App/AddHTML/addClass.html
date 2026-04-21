@@ -74,6 +74,9 @@
 
         <script src="../JS/AddJS/addClassScript.js"></script>
         <script>
+
+            var sent = false;
+
             const showMessage = (text, type) => {
                 const output = document.getElementById("output");
                 output.textContent = text;
@@ -81,6 +84,8 @@
             };
 
             document.querySelector("#classForm").addEventListener("submit", async (event) => {
+
+                if(sent) return;
                 event.preventDefault();
 
                 const session = {
@@ -110,6 +115,7 @@
 
                 if (result && result.success) {
                     showMessage("Class added successfully!", "success");
+                    sent = true;
                     form.reset();
                     return;
                 }

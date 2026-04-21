@@ -1,7 +1,8 @@
 document.addEventListener("DOMContentLoaded", async () => {
     const url = "http://localhost/dbConnector.php";
     const output = document.querySelector("#output");
-    const sql = "SELECT CONCAT(c.coachForename, ' ', c.coachSurname) AS coachName, ce.centreName FROM tblcoachcentre cc JOIN tblCoach c ON cc.coachId = c.coachId JOIN tblCentre ce ON cc.centreId = ce.centreId;";
+    const errorOutput = document.querySelector("#error-output");
+    const sql = "SELECT c.coachId, ce.centreId, CONCAT(c.coachForename, ' ', c.coachSurname) AS coachName, ce.centreName FROM tblcoachcentre cc JOIN tblCoach c ON cc.coachId = c.coachId JOIN tblCentre ce ON cc.centreId = ce.centreId;";
 
     const response = await fetch(url, {
         method: "POST",
@@ -59,6 +60,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         deleteCell.appendChild(deleteButton);
         row.appendChild(deleteCell);
         deleteButton.addEventListener("click", async () => {
+            errorOutput.textContent = "";
             if (!confirm("Are you sure you want to delete this assignment?")) {
                 return;
             }   
@@ -76,10 +78,12 @@ document.addEventListener("DOMContentLoaded", async () => {
             
             if (!result || !result.success) {
                 console.log("Failed to delete assignment.");
+                errorOutput.textContent = (result.error || "Failed to delete assignment. Please try again.");
                 return;
             }   
             if (result.affected_rows === 0) {
                 console.log("No assignment was deleted. It may have already been removed.");
+                errorOutput.textContent = "Failed to delete assignment. It may have already been removed.";
                 return;
             }
             console.log(`result : ${JSON.stringify(result)}`);

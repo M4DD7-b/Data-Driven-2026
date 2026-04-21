@@ -1,7 +1,8 @@
 document.addEventListener("DOMContentLoaded", async () => {
         const url = "http://localhost/dbConnector.php";
         const output = document.querySelector("#output");
-        const sql = "SELECT c.className, CONCAT(me.memberForename, ' ', me.memberSurname) AS memberName FROM tblReservation r JOIN tblClass c ON c.classId = r.classId JOIN tblMember me ON me.memberId = r.memberId;";
+        const errorOutput = document.querySelector("#error-output");
+        const sql = "SELECT me.memberId, c.classId, c.className, CONCAT(me.memberForename, ' ', me.memberSurname) AS memberName FROM tblReservation r JOIN tblClass c ON c.classId = r.classId JOIN tblMember me ON me.memberId = r.memberId;";
 
         const response = await fetch(url, {
             method: "POST",
@@ -60,6 +61,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         deleteCell.appendChild(deleteButton);
         row.appendChild(deleteCell);
         deleteButton.addEventListener("click", async () => {
+            errorOutput.textContent = "";
             if (!confirm("Are you sure you want to delete this reservation?")) {
                 return;
             }   
@@ -77,10 +79,12 @@ document.addEventListener("DOMContentLoaded", async () => {
             
             if (!result || !result.success) {
                 console.log("Failed to delete reservation.");
+                errorOutput.textContent = (result.error || "Failed to delete reservation. Please try again.");
                 return;
             }   
             if (result.affected_rows === 0) {
                 console.log("No reservation was deleted. It may have already been removed.");
+                errorOutput.textContent = "Failed to delete reservation. It may have already been removed.";
                 return;
             }
             console.log(`result : ${JSON.stringify(result)}`);

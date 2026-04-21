@@ -138,6 +138,13 @@ th {
     -webkit-overflow-scrolling: touch;
 }
 
+.error-output {
+    color: var(--danger);
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: center;
+}
+
 ul {
     list-style: circle;
     padding-left: 25px;

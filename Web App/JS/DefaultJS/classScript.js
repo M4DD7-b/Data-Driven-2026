@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", async () => {
         const url = "http://localhost/dbConnector.php";
         const output = document.querySelector("#output");
+        const errorOutput = document.querySelector("#error-output");
         const sql = "SELECT ce.centreName, c.classCategory, c.classDate, c.classStartTime, c.classEndTime FROM tblClass c JOIN tblCentre ce ON c.centreId = ce.centreId;";
 
         const response = await fetch(url, {
@@ -74,6 +75,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         deleteCell.appendChild(deleteButton);
         row.appendChild(deleteCell);
         deleteButton.addEventListener("click", async () => {
+            errorOutput.textContent = "";
+
             if (!confirm("Are you sure you want to delete this class?")) {
                 return;
             }   
@@ -91,10 +94,12 @@ document.addEventListener("DOMContentLoaded", async () => {
             
             if (!result || !result.success) {
                 console.log("Failed to delete class.");
+                errorOutput.textContent = (result.error || "Unknown error");
                 return;
             }   
             if (result.affected_rows === 0) {
                 console.log("No class was deleted. It may have already been removed.");
+                errorOutput.textContent = "No class was deleted. It may have already been removed.";
                 return;
             }
             console.log(`result : ${JSON.stringify(result)}`);

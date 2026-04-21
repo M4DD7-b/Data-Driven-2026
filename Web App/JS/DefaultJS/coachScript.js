@@ -1,7 +1,9 @@
 document.addEventListener("DOMContentLoaded", async () => {
+
     const url = "http://localhost/dbConnector.php";
     const output = document.querySelector("#output");
-    const sql = "SELECT CONCAT(coachForename, ' ', coachSurname) AS coachName, coachEmail, coachPhone, coachSpecialisation FROM tblCoach;";
+    const errorOutput = document.querySelector("#error-output");
+    const sql = "SELECT coachId, CONCAT(coachForename, ' ', coachSurname) AS coachName, coachEmail, coachPhone, coachSpecialisation FROM tblCoach;";
 
     const response = await fetch(url, {
         method: "POST",
@@ -61,20 +63,24 @@ document.addEventListener("DOMContentLoaded", async () => {
             window.location.href = `../EditHTML/editCoach.html?coachId=${coach.coachId}`;
         });
 
-
         const deleteCell = document.createElement("td");
         const deleteButton = document.createElement("button");
         deleteButton.textContent = "Delete";
         
         deleteCell.appendChild(deleteButton);
         row.appendChild(deleteCell);
+<<<<<<< HEAD
 
         deleteButton.addEventListener("click", async () => {
+=======
+        deleteButton.addEventListener("click", async (event) => {
+            errorOutput.textContent = "";
+>>>>>>> af2b18dbd4ef94a1b1f544c884398f802133627b
             if (!confirm("Are you sure you want to delete this coach?")) {
                 return;
             }   
-            const deleteSql = `DELETE FROM tblCoach WHERE coachId = ${coach.coachId} LIMIT 1;`;
 
+            const deleteSql = `DELETE FROM tblCoach WHERE coachId = ${coach.coachId} LIMIT 1;`;
             
             const response = await fetch(url, {
                 method: "POST",
@@ -87,10 +93,12 @@ document.addEventListener("DOMContentLoaded", async () => {
             
             if (!result || !result.success) {
                 console.log("Failed to delete coach.");
+                errorOutput.textContent = (result.error || "Unknown error");
                 return;
             }   
             if (result.affected_rows === 0) {
                 console.log("No coach was deleted. It may have already been removed.");
+                errorOutput.textContent = "No coach was deleted. It may have already been removed.";
                 return;
             }
             console.log(`result : ${JSON.stringify(result)}`);
