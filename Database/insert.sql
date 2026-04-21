@@ -41,10 +41,10 @@ INSERT INTO tblCoach VALUES
     ('King',		'Ochoa',		'king.ochoa@gmail.com',				'07077988530',	'Group Fitness'),
     ('Evan',		'Mcmillan',		'evan.mcmillan@icloud.com',			'07818513640',	'Nutrition Coaching'),
     ('Alissa',		'Cannon',		'alissa.cannon@outlook.com',		'07006738521',	'Nutrition Coaching'),
-	('Ernestin',	'Escobar',		'rufus.dominguez@hotmail.com',		'07935871555',	'Cardio Fitness'),
-    ('Rufus',		'Dominguez',	'vance.case@gmail.com',				'07909839825',	'Group Fitness'),
-    ('Vance',		'Case',			'latonya.brennan@icloud.com',		'07715056638', 'Nutrition Coaching'),
-    ('Latonya',		'Brennan',		'ernestine.escobr@outlook.com',		'07007117185',	'Strength Training');
+	('Ernestin',	'Escobar',		'ernestine.escobr@outlook.com',		'07935871555',	'Cardio Fitness'),
+    ('Rufus',		'Dominguez',	'rufus.dominguez@hotmail.com',		'07909839825',	'Group Fitness'),
+    ('Vance',		'Case',			'vance.case@gmail.com',				'07715056638', 'Nutrition Coaching'),
+    ('Latonya',		'Brennan',		'latonya.brennan@icloud.com',		'07007117185',	'Strength Training');
                                                                          
 INSERT INTO tblCoachCentre VALUES
     (1,1),
