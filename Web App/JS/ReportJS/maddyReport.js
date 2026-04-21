@@ -39,7 +39,7 @@ function hideModal() {
 }
 
 async function loadTurnoutData() {
-    const sql = "SELECT c.classCategory, COUNT(r.memberId) AS reservedMembers FROM tblClass c LEFT JOIN tblReservation r ON c.classId = r.classId GROUP BY c.classCategory ORDER BY reservedMembers DESC;";
+    const sql = "SELECT * FROM vwClassTurnout;";
 
     callSql(sql, data => {
         const canvas = document.getElementById('report1-chart');

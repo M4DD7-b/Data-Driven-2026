@@ -14,7 +14,7 @@ async function callSql(sql, onJsonLoad) {
 
 
 async function loadClassPerCoachData() {
-    const sql = `SELECT c.coachId, CONCAT(c.coachForename, ' ', c.coachSurname) as 'coachName', COUNT(cl.classId) AS entryCount FROM tblcoach c LEFT JOIN tblclass cl ON c.coachId = cl.coachId GROUP BY c.coachId;`
+    const sql = `SELECT * FROM vwCoachClass;`
 
     callSql(sql, data => {
         const ctx = document.getElementById('report1-chart');

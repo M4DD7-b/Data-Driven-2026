@@ -131,11 +131,11 @@ async function report2(){
 
 //line chart
 async function report3(){ 
-    const report3Sql = "SELECT AVG(DATEDIFF(CURDATE(),member.membershipStartDate)) AS average FROM tblmember AS member WHERE DATEDIFF(CURDATE(), member.memberDOB) < 7306 UNION ALL " +
-"SELECT AVG(DATEDIFF(CURDATE(),member.membershipStartDate))  FROM tblmember AS member WHERE DATEDIFF(CURDATE(), member.memberDOB) >= 7306 && DATEDIFF(CURDATE(), member.memberDOB) < 10958 UNION ALL " +
-"SELECT AVG(DATEDIFF(CURDATE(),member.membershipStartDate))  FROM tblmember AS member WHERE DATEDIFF(CURDATE(), member.memberDOB) >= 10958 && DATEDIFF(CURDATE(), member.memberDOB) < 14610 UNION ALL " +
-"SELECT AVG(DATEDIFF(CURDATE(),member.membershipStartDate))  FROM tblmember AS member WHERE DATEDIFF(CURDATE(), member.memberDOB) >= 14610 && DATEDIFF(CURDATE(), member.memberDOB) < 18263 UNION ALL " +
-"SELECT AVG(DATEDIFF(CURDATE(),member.membershipStartDate))  FROM tblmember AS member WHERE DATEDIFF(CURDATE(), member.memberDOB) >= 18263;";
+    const report3Sql = "SELECT * FROM vwUnderTwenty UNION ALL " + 
+    "SELECT * FROM vwTwentyThirty UNION ALL " +
+    "SELECT * FROM vwThirtyForty UNION ALL " + 
+    "SELECT * FROM vwFortyFifty UNION ALL " + 
+    "SELECT * FROM vwFiftyPlus;";
 //average time with service of each age group
 
 
