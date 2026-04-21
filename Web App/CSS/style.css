@@ -191,13 +191,46 @@ h2 {
 }
 
 #modal {
+    background: #E0D5F3;
+    border-radius: 12px;
     position: fixed;
-    inset: 0;
-    z-index: 9999;
+    width: 35%;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
 }
 
-.background {
-    background: rgba(0, 0, 0, 0.5);
+#modal-header {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+#modal-list {
+    list-style: none;
+    display: grid;
+    gap: 8px;
+    overflow: auto;
+}
+
+#modal-title {
+    font-size: 18px;
+}
+
+#close {
+    color: var(--primary);
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    margin: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#close:hover {
+    background-color: var(--bg);
+    color: var(--primary);
 }
 
 .content {

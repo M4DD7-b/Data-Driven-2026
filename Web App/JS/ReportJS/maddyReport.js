@@ -9,30 +9,75 @@ async function callSql(sql, onJsonLoad) {
     await response.json().then(onJsonLoad);
 }
 
-async function loadLowestTurnoutData() {
+function showModal(title, members) {
+    const modal = document.getElementById('modal');
+    const modalTitle = document.getElementById('modal-title')
+    const modalList = document.getElementById('modal-list');
+
+    modalTitle.textContent = title;
+    modalList.innerHTML= '';
+
+    if (!members || members.length === 0) {
+        const li = document.createElement('li');
+        li.textContent = "No members found.";
+        modalList.appendChild(li);
+    } else {
+        for (const member of members) {
+            const li = document.createElement('li');
+            li.textContent = member.memberName || `${member.memberForename || ''} ${member.memberSurname || ''}`.trim();
+            modalList.appendChild(li);
+        }
+    }
+    modal.classList.remove('hidden');
+}
+
+function hideModal() {
+    const modal = document.getElementById('modal');
+    if (modal) {
+        modal.classList.add('hidden');
+    }
+}
+
+async function loadTurnoutData() {
     const sql = "SELECT c.classCategory, COUNT(r.memberId) AS reservedMembers FROM tblClass c LEFT JOIN tblReservation r ON c.classId = r.classId GROUP BY c.classCategory ORDER BY reservedMembers DESC;";
 
     callSql(sql, data => {
-        const ctx = document.getElementById('report1-chart');
+        const canvas = document.getElementById('report1-chart');
+        const ctx = canvas.getContext ? canvas.getContext('2d') : canvas;
 
         const classCategories = data.data.map(row => row.classCategory);
         const reservedMembers = data.data.map(row => row.reservedMembers);
-
-        console.log("Class Categories:", classCategories);
-        console.log("Reserved Members:", reservedMembers);
-
-        const pieChart = new Chart(ctx, {
+        
+        if (window._report1Chart) window._report1Chart.destroy();
+            window._report1Chart = new Chart(ctx, {
             type: 'pie',
             data: {
                 labels: classCategories,
-                datasets: [
-                    {
-                        label: '# of reserved members',
-                        data: reservedMembers,
-                        borderWidth: 1
-                    }
-                ]
+                datasets: [{ label: '# of reserved members', data: reservedMembers, borderWidth: 1 }]
             },
+            options: {
+                onClick: (event, elements) => {
+                    if (!elements.length) {
+                        return;
+                    } else {
+                        const element = elements[0];
+                        const index = element.index;
+                        const category = classCategories[index];
+
+                        const membersSQL = `SELECT m.memberId, CONCAT(m.memberForename, ' ', m.memberSurname) AS memberName FROM tblMember m JOIN tblReservation r ON m.memberId = r.memberId JOIN tblClass c ON r.classId = c.classId WHERE c.classCategory = '${category}';`;
+                        
+                        callSql(membersSQL, membersData => {
+                            const members = membersData.data;
+                            showModal(`Members attending: ${category}`, members);
+                        });
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    position: 'right'
+                }
+            }
         });
 
         const tableContainer = document.getElementById('table1-container');
@@ -190,7 +235,10 @@ async function loadConditionDifferenceData() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    loadLowestTurnoutData();
-    loadMassDifferenceData();
-    loadConditionDifferenceData();
+  const closeBtn = document.getElementById('close');
+  if (closeBtn) closeBtn.addEventListener('click', hideModal);
+
+  loadTurnoutData();
+  loadMassDifferenceData();
+  loadConditionDifferenceData();
 });
