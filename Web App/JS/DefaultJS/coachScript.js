@@ -65,8 +65,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         const deleteCell = document.createElement("td");
         const deleteButton = document.createElement("button");
         deleteButton.textContent = "Delete";
+        
         deleteCell.appendChild(deleteButton);
         row.appendChild(deleteCell);
+
         deleteButton.addEventListener("click", async () => {
             if (!confirm("Are you sure you want to delete this coach?")) {
                 return;

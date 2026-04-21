@@ -1,0 +1,18 @@
+Improve css
+    - font
+    - fill space 
+    
+Functionality
+    - remove unneeded data (IDs)
+    - filters 
+        - dynamicly build query based on filters
+    - make data just more
+    
+Seperation
+    - Seperate crud operations from reports.
+        - Basically just remake phpmyadmin
+
+Improve add
+    - More validation
+    - Add dropdowns/number inputs
+
