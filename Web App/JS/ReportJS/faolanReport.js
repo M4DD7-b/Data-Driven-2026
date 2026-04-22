@@ -16,7 +16,7 @@ async function getSQLInfo(sql, event){
 async function report1(output){
     const report1Sql = "SELECT Centre.centreName, concat(Centre.street,', ',Centre.city) AS centreLocation, Centre.unitNo, Centre.postcode,Class.totalClassId, CoachCentre.totalCoachId " +
 "FROM tblcentre AS Centre " +
-"JOIN ( SELECT centreID, Count(tblclass.classId) AS totalClassId FROM tblclass GROUP BY tblclass.centreId) AS Class ON Class.centreId = Centre.centreId " +
+"LEFT JOIN ( SELECT centreID, Count(tblclass.classId) AS totalClassId FROM tblclass GROUP BY tblclass.centreId) AS Class ON Class.centreId = Centre.centreId " +
 "JOIN (SELECT centreId, Count(tblcoachcentre.coachId) AS totalCoachId FROM tblcoachcentre GROUP BY tblcoachcentre.centreId) AS CoachCentre ON CoachCentre.centreId = Centre.centreId"
 
 
@@ -57,6 +57,9 @@ async function report1(output){
 
             const centreClassAmountCell = document.createElement("td");
             centreClassAmountCell.textContent = centre.totalClassId;
+            if(centre.totalClassId==null){
+                centreClassAmountCell.textContent = 0;
+            }
             row.appendChild(centreClassAmountCell);
 
             const centreCoachAmountCell = document.createElement("td");
@@ -69,7 +72,7 @@ async function report1(output){
 
     //table.setAttribute("table-layout","fixed")
     //table.setAttribute("width","100%");
-  
+    table.id = "report1Table"
     
     output.appendChild(table);
 
@@ -131,11 +134,11 @@ async function report2(){
 
 //line chart
 async function report3(){ 
-    const report3Sql = "SELECT AVG(DATEDIFF(CURDATE(),member.membershipStartDate)) AS average FROM tblmember AS member WHERE DATEDIFF(CURDATE(), member.memberDOB) < 7306 UNION ALL " +
-"SELECT AVG(DATEDIFF(CURDATE(),member.membershipStartDate))  FROM tblmember AS member WHERE DATEDIFF(CURDATE(), member.memberDOB) >= 7306 && DATEDIFF(CURDATE(), member.memberDOB) < 10958 UNION ALL " +
-"SELECT AVG(DATEDIFF(CURDATE(),member.membershipStartDate))  FROM tblmember AS member WHERE DATEDIFF(CURDATE(), member.memberDOB) >= 10958 && DATEDIFF(CURDATE(), member.memberDOB) < 14610 UNION ALL " +
-"SELECT AVG(DATEDIFF(CURDATE(),member.membershipStartDate))  FROM tblmember AS member WHERE DATEDIFF(CURDATE(), member.memberDOB) >= 14610 && DATEDIFF(CURDATE(), member.memberDOB) < 18263 UNION ALL " +
-"SELECT AVG(DATEDIFF(CURDATE(),member.membershipStartDate))  FROM tblmember AS member WHERE DATEDIFF(CURDATE(), member.memberDOB) >= 18263;";
+    const report3Sql = "SELECT * FROM vwUnderTwenty UNION ALL " + 
+    "SELECT * FROM vwTwentyThirty UNION ALL " +
+    "SELECT * FROM vwThirtyForty UNION ALL " + 
+    "SELECT * FROM vwFortyFifty UNION ALL " + 
+    "SELECT * FROM vwFiftyPlus;";
 //average time with service of each age group
 
 

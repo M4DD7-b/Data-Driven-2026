@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Benchmark Sports</title>
         <link rel="stylesheet" href="../CSS/style.css">
+        <link rel="stylesheet" href="../CSS/emmaData.css"
     </head>
     <body>
         <div class="page">
@@ -55,13 +56,19 @@
                     
                 
                 <h2 id="report_title" tyle="font-size: 60px;">Reports</h2>
-                <!--<form name="reportChoice" id="faolanReportsForm" style="text-align: right;">
-                    <select name="reports" id="faolanReports" multiple size="3" required="true">
-                        <option value="report1">Placeholder1</option>
-                        <option value="report2">Placeholder2</option>
-                        <option value="report3">Placeholder3</option>
+                <div style="padding-left: 120px; padding-top:50px" class="main">
+                    <input type="text" id="filter" name="gamer">                
+                    <select class="dropdown" id="filter-dropdown">
+                        <option value="0">Centre Name</option>
+                        <option value="1">Address</option>
+                        <option value="2">Postcode</option>
+                        <option value="3">Unit Number</option>
+                        <option value="4">Amount of Classes</option>
+                        <option value="5">Amount of Coaches</option>
                     </select>
-                </form>-->
+                </div>
+
+                
                 
 
 
@@ -81,6 +88,7 @@
 
                 
                 <script src="..\JS\ReportJS\faolanReport.js"></script>
+                <script src="..\JS\ReportJS\filter.js"></script>
             </div>
 
 

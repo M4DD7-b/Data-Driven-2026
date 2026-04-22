@@ -135,13 +135,13 @@ async function loadOlderMembers(output) {
 // REPORT THREE - TABLE + CHART
 async function loadCentreSpecialised(output) {
     
-    const reportThreeSql = "SELECT cn.centreName, cn.city, COUNT(DISTINCT co.coachSpecialisation) AS numSpecialisation FROM tblcoachcentre AS cc INNER JOIN tblcoach AS co ON cc.coachId=co.coachId INNER JOIN tblcentre AS cn ON cc.centreId=cn.centreId GROUP BY cc.centreID, cn.city ORDER BY cn.centreName;"
+    const reportThreeSql = "SELECT * FROM vwSpecialisationNumber;"
     
     var sqlData = fetchSQL(reportThreeSql, event => {
         
         // REPORT THREE - TABLE
         const ctnr = document.getElementById('chart-container');
-        const barColours = ["rgb(222, 48, 34)","rgb(255, 127, 39)","rgb(255, 201, 14)","rgb(181, 230, 29)","rgb(106, 230, 30)"];
+        const barColours = ["rgb(222, 48, 34)","rgb(255, 127, 39)","rgb(255, 201, 14)","rgb(181, 230, 29)","rgb(106, 230, 30)","rgb(37, 209, 55)","rgb(20, 215, 143)","rgb(0, 162, 232)","rgb(63, 72, 204)","rgb(160, 85, 186)","rgb(212, 66, 178)","rgb(240, 74, 132)"];
         // AMEND WHEN MORE DATA ADDED !!!!!!!
         // ["rgb(222, 48, 34)","rgb(255, 127, 39)","rgb(255, 201, 14)","rgb(181, 230, 29)","rgb(106, 230, 30)","rgb(37, 209, 55)","rgb(20, 215, 143)","rgb(0, 162, 232)","rgb(63, 72, 204)","rgb(160, 85, 186)","rgb(212, 66, 178)","rgb(240, 74, 132)"]
         
