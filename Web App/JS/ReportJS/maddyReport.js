@@ -72,11 +72,6 @@ async function loadTurnoutData() {
                         });
                     }
                 }
-            },
-            plugins: {
-                legend: {
-                    position: 'right'
-                }
             }
         });
 
