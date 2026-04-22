@@ -3,7 +3,9 @@ const url = "http://localhost/dbConnector.php";
 async function callSql(sql, onJsonLoad) {
     const response = await fetch(url, {
         method: "POST",
-        body: new URLSearchParams({ query: sql })
+        body: new URLSearchParams({
+            query: sql
+        })
     });
 
     await response.json().then(onJsonLoad);
@@ -39,7 +41,7 @@ function hideModal() {
 }
 
 async function loadTurnoutData() {
-    const sql = "SELECT * FROM vwClassTurnout;";
+    const sql = "SELECT c.classCategory, COUNT(r.memberId) AS reservedMembers FROM tblClass c LEFT JOIN tblReservation r ON c.classId = r.classId GROUP BY c.classCategory ORDER BY reservedMembers DESC;";
 
     callSql(sql, data => {
         const canvas = document.getElementById('report1-chart');
@@ -71,6 +73,11 @@ async function loadTurnoutData() {
                             showModal(`Members attending: ${category}`, members);
                         });
                     }
+                }
+            },
+            plugins: {
+                legend: {
+                    position: 'right'
                 }
             }
         });
@@ -110,63 +117,46 @@ async function loadTurnoutData() {
 }
 
 async function loadMassDifferenceData() {
-    const sql = "SELECT CONCAT(m.memberForename, ' ', m.memberSurname) AS memberName, MAX(me.memberCurrentMuscleMass) - MIN(me.memberStartMuscleMass) AS massDifference FROM tblMember m JOIN tblMeasurement me ON m.memberId = me.memberId WHERE YEAR(m.membershipStartDate) = YEAR(CURDATE()) GROUP BY m.memberId ORDER BY massDifference ASC LIMIT 10;";
+    const sql = "SELECT CONCAT(m.memberForename, ' ', m.memberSurname) AS memberName, MAX(me.memberCurrentMuscleMass) - MIN(me.memberStartMuscleMass) AS massDifference FROM tblMember m JOIN tblMeasurement me ON m.memberId = me.memberId WHERE YEAR(m.membershipStartDate) = YEAR(CURDATE()) GROUP BY m.memberId ORDER BY massDifference DESC LIMIT 5;";
 
-    callSql(sql, data => {
-        const ctx = document.getElementById('report2-chart');
-
-        const memberNames = data.data.map(row => row.memberName);
-        const massDifferences = data.data.map(row => row.massDifference);
-
-        console.log("Member Names:", memberNames);
-        console.log("Mass Differences:", massDifferences);
-
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: memberNames,
-                datasets: [
-                    {
-                        label: 'Muscle Mass Difference',
-                        data: massDifferences,
-                        borderWidth: 1
-                    }
-                ]
-            }
-        });
-
-        const tableContainer = document.getElementById('table2-container');
-        tableContainer.innerHTML = ``;
-
-        var table = document.createElement('table');
-        const headerRow = document.createElement("tr");
-
-        const headers = ["Member Name", "Mass Difference"];
-
-        for (const heading of headers) {
-            const th = document.createElement("th");
-            th.textContent = heading;
-            headerRow.appendChild(th);
-        }
-
-        table.appendChild(headerRow);
-
-        data.data.forEach(row => {
-            const dataRow = document.createElement("tr");
-
-            const classNameCell = document.createElement("td");
-            classNameCell.textContent = row.className;
-            dataRow.appendChild(classNameCell);
-
-            const reservedMembersCell = document.createElement("td");
-            reservedMembersCell.textContent = row.reservedMembers;
-            dataRow.appendChild(reservedMembersCell);
-
-            table.appendChild(dataRow);
-        });
-
-        tableContainer.appendChild(table);
+    const response = await fetch(url, {
+        method: "POST",
+        body: new URLSearchParams({
+            query: sql
+        })
     });
+
+    const result = await response.json();
+
+    const table = document.createElement("table");
+    const headerRow = document.createElement("tr");
+    const tableContainer = document.getElementById('table2-container');
+
+    const headers = ["Member Name", "Mass Difference"];
+
+    for (const heading of headers) {
+        const th = document.createElement("th");
+        th.textContent = heading;
+        headerRow.appendChild(th);
+    }
+
+    table.appendChild(headerRow);
+
+    for (const measure of result.data) {
+        const row = document.createElement("tr");
+
+        const memberNameCell = document.createElement("td");
+        memberNameCell.textContent = measure.memberName;
+        row.appendChild(memberNameCell);
+
+        const massDifferenceCell = document.createElement("td");
+        massDifferenceCell.textContent = measure.massDifference;
+        row.appendChild(massDifferenceCell);
+
+        table.appendChild(row);
+    }
+
+    tableContainer.appendChild(table);
 }
 
 async function loadConditionDifferenceData() {

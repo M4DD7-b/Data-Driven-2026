@@ -194,6 +194,9 @@ h2 {
     background: #E0D5F3;
     border-radius: 12px;
     position: fixed;
+    left: 50%;
+    top: 45%;
+    transform: translate(-50%, -50%);
     width: 35%;
     align-items: center;
     justify-content: center;
