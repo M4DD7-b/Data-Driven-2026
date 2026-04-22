@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Benchmark Sports</title>
         <link rel="stylesheet" href="../CSS/style.css">
+        <link rel = "stylesheet" href = "../CSS/hanaData.css">
     </head>
     <body>
         <div class="page">
@@ -27,6 +28,7 @@
                 <a href="../DataHTML/EmmaData.html">Emma Devlin</a>
             </div>
 
+
             <div>
                 <div class="report-header">
                     <h2>Hana's Data</h2>
@@ -37,6 +39,48 @@
 
             </div>
 
+            <div>
+                <div class = "tabs">
+                    <button class = "tab active" data-report = "report1">Report 1</button>
+                    <button class = "tab" data-report = "report2">Report 2</button>
+                    <button class = "tab" data-report="report3">Report 3</button>
+                </div>
+                </div>
+
+                <div class="main">
+                    <!-- REPORT 1 : The most Popular Class Time Slots -->
+                    <div id="report1" class="view">
+                        <div class="report" style="text-align: center;">
+                            <h2>Most popular Time Slots:</h2>
+                            <div id="table1-container" class="table-container;"></div>
+                                <canvas id="chart1-container"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- REPORT 2: The number of members in each centre] -->
+                    <div id="report2" class="hide">
+                        <div class="report" style="text-align: center;">
+                            <h2>Members Per Centre:</h2>
+                            <div id="table2-container" class="table-container"></div>
+                        </div>
+                    </div>
+
+                    <!-- REPORT 3: How many classes a member has attended -->
+                    <div id="report3" class="hide">
+                        <div class="report" style="text-align: center;">
+                            <h2>Member Attendance:</h2>
+                            <div id="table3-container" class="table-container"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+
+            </div>
+
         </div>  
+
+        <script src="../JS/ReportJS/hanaReport.js"></script> 
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>  
     </body>
-</html> 
+</html>  
