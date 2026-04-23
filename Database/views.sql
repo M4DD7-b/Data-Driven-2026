@@ -4,6 +4,7 @@ DROP VIEW IF EXISTS vwTwentyThirty;
 DROP VIEW IF EXISTS vwThirtyForty;
 DROP VIEW IF EXISTS vwFortyFifty;
 DROP VIEW IF EXISTS vwFiftyPlus;
+DROP VIEW IF EXISTS vwMemberCentre;
 DROP VIEW IF EXISTS vwClassTurnout;
 DROP VIEW IF EXISTS vwCoachClass;
 
@@ -58,11 +59,21 @@ FROM tblmember AS member
 WHERE DATEDIFF(CURDATE(), 
 member.memberDOB) >= 18263;
 
+-- hana_report2
+CREATE VIEW vwMemberCentre AS
+SELECT c.centreName, 
+    COUNT(m.memberID) AS total_members 
+FROM tblCentre c  
+LEFT JOIN tblMember m  
+ON c.centreID = m.homeCentreId 
+GROUP BY c.centreName 
+ORDER BY total_members DESC;
+
 -- maddy_report1
 CREATE VIEW vwClassTurnout AS
 SELECT c.classCategory, 
     COUNT(r.memberId) AS reservedMembers 
-    FROM tblClass c 
+FROM tblClass c 
 LEFT JOIN tblReservation r 
 ON c.classId = r.classId 
 GROUP BY c.classCategory 

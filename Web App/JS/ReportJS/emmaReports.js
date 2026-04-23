@@ -27,10 +27,13 @@ const url = "http://localhost/dbConnector.php";
 
 
 async function fetchSQL(sql, load){
-    const response = await fetch("http://localhost/dbConnector.php", {
+    const response = await fetch(
+        "http://localhost/dbConnector.php", 
+        {
         method: "POST",
         body: new URLSearchParams({ query: sql })
-    }); 
+        }
+    ); 
 
     const result = await response.json().then(load)
 }
@@ -78,6 +81,8 @@ async function loadMedicalConditionData(output) {
 
             table.appendChild(row);        
         }
+        
+        table.id = "reportOneTable";
 
         output.appendChild(table);
     })
@@ -126,6 +131,8 @@ async function loadOlderMembers(output) {
 
             table.appendChild(row);        
         }
+
+        table.id = "reportTwoTable";
 
         output.appendChild(table);
     })
@@ -211,6 +218,8 @@ async function loadCentreSpecialised(output) {
 
             table.appendChild(row);        
         }
+
+        table.id = "reportThreeTable";
 
         output.appendChild(table);
     })

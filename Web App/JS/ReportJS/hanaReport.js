@@ -119,7 +119,7 @@ async function loadPopularTimeSlots(output) {
 
 // REPORT 2: MEMEBER PER CENTRE
 async function loadMemberPerCentre(output) {
-    const sql = `SELECT c.centreName, COUNT(m.memberID) AS total_members FROM tblCentre c  LEFT JOIN tblMember m  ON c.centreID = m.homeCentreId GROUP BY c.centreName ORDER BY total_members DESC;`;
+    const sql = `SELECT * FROM vwMemberCentre;`;
 
     var sqlData = fetchSQL(sql, event => {
         console.log(JSON.stringify(event, null, 2));
