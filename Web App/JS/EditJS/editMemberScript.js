@@ -48,8 +48,8 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("memberSurname").value = session.memberSurname;
         document.getElementById("memberEmail").value = session.memberEmail;
         document.getElementById("memberPhone").value = session.memberPhone;
-        document.getElementById("memberDateOfBirth").value = session.memberDateOfBirth;
-        document.getElementById("memberType").value = session.memberType;
+        document.getElementById("memberDateOfBirth").value = session.memberDOB;
+        document.getElementById("memberType").value = session.membershipType;
         document.getElementById("membershipStartDate").value = session.membershipStartDate;
 
     });
@@ -66,6 +66,11 @@ document.addEventListener("DOMContentLoaded", function() {
         const memberDateOfBirth = document.getElementById("memberDateOfBirth").value.trim();
         const memberType = document.getElementById("memberType").value.trim();
         const membershipStartDate = document.getElementById("membershipStartDate").value.trim();
+
+        if(memberForename === "" || memberSurname === "" || memberEmail === "" || memberPhone === "" || memberDateOfBirth === "" || memberType === "" || membershipStartDate === "") {
+            console.log("Please fill in all fields.");
+            return;
+        }
 
         console.log(`Form Data: ${memberForename}, ${memberSurname}, ${memberEmail}, ${memberPhone}, ${memberDateOfBirth}, ${memberType}, ${membershipStartDate}`);
         
