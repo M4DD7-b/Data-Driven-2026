@@ -175,7 +175,7 @@ async function loadMembershipLengthData() {
 
 
 async function loadClassPerGymData() {
-    const sql = `SELECT c.centreId, c.centreName, COUNT(cl.classId) AS classCount FROM tblcentre c LEFT JOIN tblclass cl ON c.centreId = cl.centreId GROUP BY c.centreId;`;
+    const sql = `SELECT c.centreId, c.centreName, COUNT(cl.classId) AS classCount FROM tblclass cl RIGHT JOIN tblcentre c ON c.centreId = cl.centreId GROUP BY c.centreId;`;
 
     callSql(sql, data => {
         const ctx = document.getElementById('report3-chart');
@@ -283,9 +283,4 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.view-button').forEach(button => {
         button.addEventListener('click', () => toggleTableView(button.id.substring("tableView-report".length)));
     });
-
-    // document.getElementById('tableView-report1').addEventListener('click', () => toggleTableView(1));
-    // document.getElementById('tableView-report2').addEventListener('click', () => toggleTableView(2));
-    // document.getElementById('tableView-report3').addEventListener('click', () => toggleTableView(3));
-
 });

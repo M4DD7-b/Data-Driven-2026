@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const url = "http://localhost/dbConnector.php";
         const output = document.querySelector("#output");
         const errorOutput = document.querySelector("#error-output");
-        const sql = "SELECT ce.centreName, c.classCategory, c.classDate, c.classStartTime, c.classEndTime FROM tblClass c JOIN tblCentre ce ON c.centreId = ce.centreId;";
+        const sql = "SELECT c.classId, ce.centreName, c.classCategory, c.classDate, c.classStartTime, c.classEndTime FROM tblClass c JOIN tblCentre ce ON c.centreId = ce.centreId;";
 
         const response = await fetch(url, {
             method: "POST",
