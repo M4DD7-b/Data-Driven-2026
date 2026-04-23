@@ -1,4 +1,3 @@
-DROP VIEW IF EXISTS vwSpecialisationNumber;
 DROP VIEW IF EXISTS vwUnderTwenty;
 DROP VIEW IF EXISTS vwTwentyThirty;
 DROP VIEW IF EXISTS vwThirtyForty;
@@ -7,20 +6,6 @@ DROP VIEW IF EXISTS vwFiftyPlus;
 DROP VIEW IF EXISTS vwMemberCentre;
 DROP VIEW IF EXISTS vwClassTurnout;
 DROP VIEW IF EXISTS vwCoachClass;
-
--- emma_report3
-CREATE VIEW vwSpecialisationNumber AS
-SELECT cn.centreName, 
-    cn.city, 
-    COUNT(DISTINCT co.coachSpecialisation) AS numSpecialisation 
-FROM tblcoachcentre AS cc 
-INNER JOIN tblcoach AS co 
-ON cc.coachId=co.coachId 
-INNER JOIN tblcentre AS cn 
-ON cc.centreId=cn.centreId 
-GROUP BY cc.centreID, 
-    cn.city 
-ORDER BY cn.centreName;
 
 -- faolán_report3
 -- under 20

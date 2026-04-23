@@ -41,7 +41,7 @@ async function fetchSQL(sql, load){
 
 // REPORT ONE - TABLE
 async function loadMedicalConditionData(output) {
-    const reportOneSql = "SELECT mb.memberID, CONCAT(mb.memberForename, ' ', mb.memberSurname) AS fullName, ms.memberCondition FROM tblMeasurement AS ms INNER JOIN tblMember AS mb ON ms.memberId=mb.memberId WHERE ms.memberCondition IS NOT NULL ORDER BY mb.memberSurname;"
+    const reportOneSql = "SELECT * FROM vwMedicalCondition;"
     
     var sqlData = fetchSQL(reportOneSql, event => {
 
@@ -91,7 +91,7 @@ async function loadMedicalConditionData(output) {
 
 // REPORT TWO - TABLE
 async function loadOlderMembers(output) {
-    const reportTwoSql = "SELECT CONCAT(mb.memberForename, ' ', mb.memberSurname) AS fullName, mb.memberDOB, ROUND(DATEDIFF(CURDATE(), mb.memberDOB)/365) AS memberAge FROM tblMember AS mb HAVING memberAge >= 40 ORDER BY mb.memberSurname;"
+    const reportTwoSql = "SELECT * FROM vwOlderMembers;"
     
     var sqlData = fetchSQL(reportTwoSql, event => {
 
