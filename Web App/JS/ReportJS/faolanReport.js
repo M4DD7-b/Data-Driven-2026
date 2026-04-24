@@ -200,10 +200,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         const report1 = document.getElementById('report1Output');
         const report2 = document.getElementById('report2Output');
         const report3 = document.getElementById('report3Output');
+        const filter = document.getElementById('filter-div');
 
         report1.style.display = 'block';
         report2.style.display = 'none';
         report3.style.display = 'none';
+        filter.style.display = "block"
+        
     });
 
     document.getElementById('report2Link').addEventListener('click', function() {
@@ -213,10 +216,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         const report1 = document.getElementById('report1Output');
         const report2 = document.getElementById('report2Output');
         const report3 = document.getElementById('report3Output');
+        const filter = document.getElementById('filter-div');
 
         report1.style.display = 'none';
         report2.style.display = 'block';
         report3.style.display = 'none';
+        filter.style.display = "none"
     });
 
     document.getElementById('report3Link').addEventListener('click', function() {
@@ -227,10 +232,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         const report1 = document.getElementById('report1Output');
         const report2 = document.getElementById('report2Output');
         const report3 = document.getElementById('report3Output');
+        const filter = document.getElementById('filter-div');
 
         report1.style.display = 'none';
         report2.style.display = 'none';
         report3.style.display = 'block';
+        filter.style.display = "none"
     });
 
     
