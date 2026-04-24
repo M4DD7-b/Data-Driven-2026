@@ -4,7 +4,8 @@ DROP VIEW IF EXISTS vwSpecialisationNumber;
 
 -- Report Title: List of members with medical conditions
 -- Business Question: How many members with a medical condition are registered at the fitness centre?
--- Why this report is useful: Allows for the identification of members in the target group and see if measures need to be taken to ensure the gyms are more accessible to further encourage participation
+-- Why this report is useful: Allows for the identification of members in the target group and see if measures need to be taken 
+   -- to ensure the gyms are more accessible to further encourage participation
 -- Tables used: Tabular report
 CREATE VIEW vwMedicalCondition AS
 SELECT mb.memberID, 
