@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const url = "https://mbrum01.webhosting1.eeecs.qub.ac.uk/dbConnector.php";
     const output = document.querySelector("#output");
     const errorOutput = document.querySelector("#error-output");
-    const sql = "SELECT c.coachId, ce.centreId, CONCAT(c.coachForename, ' ', c.coachSurname) AS coachName, ce.centreName FROM tblcoachcentre cc JOIN tblCoach c ON cc.coachId = c.coachId JOIN tblCentre ce ON cc.centreId = ce.centreId;";
+    const sql = "SELECT c.coachId, ce.centreId, CONCAT(c.coachForename, ' ', c.coachSurname) AS coachName, ce.centreName FROM tblCoachCentre cc JOIN tblCoach c ON cc.coachId = c.coachId JOIN tblCentre ce ON cc.centreId = ce.centreId;";
 
     const response = await fetch(url, {
         method: "POST",
