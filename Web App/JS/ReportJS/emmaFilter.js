@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const filter = document.getElementById("filter1");
         const tableElement = document.getElementById(table);
         if(tableElement==null){
-            console.log("Assigned report does not exist on this webpage")
+            console.log("The assigned report does not exist on this webpage!")
             return;
         }
         
@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const tableElement = document.getElementById(table);
 
         if(tableElement==null){
-            console.log("Assigned report does not exist on this webpage")
+            console.log("The assigned report does not exist on this webpage!")
             return;
         }
 
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const tableElement = document.getElementById(table);
         
         if(tableElement==null){
-            console.log("Assigned report does not exist on this webpage")
+            console.log("The assigned report does not exist on this webpage!")
             return;
         }
 
