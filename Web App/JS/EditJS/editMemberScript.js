@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         console.log(`Form Data: ${memberForename}, ${memberSurname}, ${memberEmail}, ${memberPhone}, ${memberDateOfBirth}, ${memberType}, ${membershipStartDate}`);
         
-        const sql = `UPDATE tblMember SET memberForename = '${memberForename}', memberSurname = '${memberSurname}', memberEmail = '${memberEmail}', memberPhone = '${memberPhone}', memberDateOfBirth = '${memberDateOfBirth}', memberType = '${memberType}', membershipStartDate = '${membershipStartDate}' WHERE memberId = ${memberId} LIMIT 1;`;
+        const sql = `UPDATE tblMember SET memberForename = '${memberForename}', memberSurname = '${memberSurname}', memberEmail = '${memberEmail}', memberPhone = '${memberPhone}', memberDOB = '${memberDateOfBirth}', membershipType = '${memberType}', membershipStartDate = '${membershipStartDate}' WHERE memberId = ${memberId} LIMIT 1;`;
 
         runQuery(sql).then(result => {
             if (!result || !result.success) {
