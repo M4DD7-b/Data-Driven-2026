@@ -23,12 +23,10 @@ document.addEventListener('DOMContentLoaded', function() {
     
 
 // CONNECTING DB THROUGH PHP
-const url = "http://localhost/dbConnector.php";
-
+const url = "https://mbrum01.webhosting1.eeecs.qub.ac.uk/dbConnector.php";
 
 async function fetchSQL(sql, load){
-    const response = await fetch(
-        "http://localhost/dbConnector.php", 
+    const response = await fetch(url, 
         {
         method: "POST",
         body: new URLSearchParams({ query: sql })

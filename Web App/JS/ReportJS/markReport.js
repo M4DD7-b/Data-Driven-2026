@@ -1,5 +1,5 @@
 
-const url = "http://localhost/dbConnector.php";
+const url = "https://mbrum01.webhosting1.eeecs.qub.ac.uk/dbConnector.php";
 
 async function callSql(sql, onJsonLoad) {
     // Send the SQL statement in the body of a POST request.
@@ -96,7 +96,7 @@ async function loadClassPerCoachData() {
 }
 
 async function loadMembershipLengthData() {
-    const sql = `SELECT m.memberId, CONCAT(m.memberForename, ' ', m.memberSurname) as 'memberName', DATEDIFF(CURRENT_DATE, m.membershipStartDate) as 'membershipLength' FROM tblmember m;`;
+    const sql = `SELECT m.memberId, CONCAT(m.memberForename, ' ', m.memberSurname) as 'memberName', DATEDIFF(CURRENT_DATE, m.membershipStartDate) as 'membershipLength' FROM tblMember m;`;
     callSql(sql, data => {
         const ctx = document.getElementById('report2-chart');
         
@@ -175,7 +175,7 @@ async function loadMembershipLengthData() {
 
 
 async function loadClassPerGymData() {
-    const sql = `SELECT c.centreId, c.centreName, COUNT(cl.classId) AS classCount FROM tblclass cl RIGHT JOIN tblcentre c ON c.centreId = cl.centreId GROUP BY c.centreId;`;
+    const sql = `SELECT c.centreId, c.centreName, COUNT(cl.classId) AS classCount FROM tblClass cl RIGHT JOIN tblCentre c ON c.centreId = cl.centreId GROUP BY c.centreId;`;
 
     callSql(sql, data => {
         const ctx = document.getElementById('report3-chart');

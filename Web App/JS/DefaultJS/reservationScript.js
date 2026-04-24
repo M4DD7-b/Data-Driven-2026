@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", async () => {
-        const url = "http://localhost/dbConnector.php";
+        const url = "https://mbrum01.webhosting1.eeecs.qub.ac.uk/dbConnector.php";
         const output = document.querySelector("#output");
         const errorOutput = document.querySelector("#error-output");
         const sql = "SELECT me.memberId, c.classId, c.className, CONCAT(me.memberForename, ' ', me.memberSurname) AS memberName FROM tblReservation r JOIN tblClass c ON c.classId = r.classId JOIN tblMember me ON me.memberId = r.memberId;";

@@ -29,7 +29,7 @@ for (const tab of tabs) {
 
 });
 
-const url = "http://localhost/dbConnector.php"
+const url = "https://mbrum01.webhosting1.eeecs.qub.ac.uk/dbConnector.php"
 
 async function fetchSQL(sql,load) {
     const response = await fetch(url, {

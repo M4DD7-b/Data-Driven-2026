@@ -1,4 +1,4 @@
-const url = "http://localhost/dbConnector.php";
+const url = "https://mbrum01.webhosting1.eeecs.qub.ac.uk/dbConnector.php";
 
 async function callSql(sql, onJsonLoad) {
     const response = await fetch(url, {

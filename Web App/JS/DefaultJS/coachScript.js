@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", async () => {
 
-    const url = "http://localhost/dbConnector.php";
+    const url = "https://mbrum01.webhosting1.eeecs.qub.ac.uk/dbConnector.php";
     const output = document.querySelector("#output");
     const errorOutput = document.querySelector("#error-output");
     const sql = "SELECT coachId, CONCAT(coachForename, ' ', coachSurname) AS coachName, coachEmail, coachPhone, coachSpecialisation FROM tblCoach;";

@@ -1,6 +1,6 @@
 
 async function getSQLInfo(sql, event){
-    const response = await fetch("http://localhost/dbConnector.php", {
+    const response = await fetch("https://mbrum01.webhosting1.eeecs.qub.ac.uk/dbConnector.php", {
         method: "POST",
         body: new URLSearchParams({
             query: sql
@@ -15,9 +15,9 @@ async function getSQLInfo(sql, event){
 //table
 async function report1(output){
     const report1Sql = "SELECT Centre.centreName, concat(Centre.street,', ',Centre.city) AS centreLocation, Centre.unitNo, Centre.postcode,Class.totalClassId, CoachCentre.totalCoachId " +
-"FROM tblcentre AS Centre " +
-"LEFT JOIN ( SELECT centreID, Count(tblclass.classId) AS totalClassId FROM tblclass GROUP BY tblclass.centreId) AS Class ON Class.centreId = Centre.centreId " +
-"JOIN (SELECT centreId, Count(tblcoachcentre.coachId) AS totalCoachId FROM tblcoachcentre GROUP BY tblcoachcentre.centreId) AS CoachCentre ON CoachCentre.centreId = Centre.centreId"
+"FROM tblCentre AS Centre " +
+"LEFT JOIN ( SELECT centreID, Count(tblClass.classId) AS totalClassId FROM tblClass GROUP BY tblClass.centreId) AS Class ON Class.centreId = Centre.centreId " +
+"JOIN (SELECT centreId, Count(tblCoachCentre.coachId) AS totalCoachId FROM tblCoachCentre GROUP BY tblCoachCentre.centreId) AS CoachCentre ON CoachCentre.centreId = Centre.centreId"
 
 
     var sqlData = getSQLInfo(report1Sql, event => {
@@ -86,7 +86,7 @@ async function report1(output){
 
 //bar chart
 async function report2(){
-    const report2Sql = "SELECT tblcentre.centreName AS 'CentreName', COUNT(x.homeCentreId) AS 'TotalMembers' FROM tblmember x JOIN tblcentre ON x.homeCentreId =tblcentre.centreID GROUP BY homeCentreId  ORDER BY  COUNT('Total Members') DESC;";
+    const report2Sql = "SELECT tblCentre.centreName AS 'CentreName', COUNT(x.homeCentreId) AS 'TotalMembers' FROM tblMember x JOIN tblCentre ON x.homeCentreId =tblCentre.centreID GROUP BY homeCentreId  ORDER BY  COUNT('Total Members') DESC;";
     
     const sqlData = getSQLInfo(report2Sql, event => {
         var nameArray = [];
